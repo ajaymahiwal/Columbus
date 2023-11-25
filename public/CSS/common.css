@@ -1,0 +1,74 @@
+
+body{
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    overflow-x: hidden;
+}
+
+/* navbar */
+.nav-link{
+    color: black !important;
+}
+.fa-compass{
+    color: rgb(245, 56, 112);
+    font-size: 2.5rem;
+}
+
+
+
+/* Footer */
+footer{
+    margin-top: 7vw;
+    background-color:rgba(247, 126, 220, 0.788);
+    text-align: center;
+    padding: .5rem 0;
+}
+footer > *{
+    margin-top: 0.7rem;
+}
+.f-brand{
+    color: black;
+}
+.f-socail a{
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: black;
+}
+.f-links a{
+    color: black;
+    text-decoration: none;
+}
+.f-links a:hover{
+    text-decoration: underline;
+}
+.f-socail > *,.f-links > *{
+    margin-right: 1rem;
+}
+
+
+
+
+/* For FLash Messages */
+.fade{
+    text-align: center;
+}
+
+.user-in-out{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-weight: bold;
+}
+
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
