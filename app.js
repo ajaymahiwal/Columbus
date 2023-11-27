@@ -26,7 +26,7 @@ const listingRouter = require("./routes/listing.js");
 const userRouter = require("./routes/user.js");
 
 
-// const MONGO_URL = 'mongodb://127.0.0.1:27017/wanderlust';
+// const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
 const dbUrl = process.env.ATLASDB_URL;
 async function main() {
     await mongoose.connect(dbUrl);
@@ -110,16 +110,18 @@ app.use("/listings", listingRouter);
 app.use("/", userRouter);
 
 
-app.get("/demouser", wrapAsync(async (req, res) => {
-    // let fakeUser = new User({
-    //     email:"demouser@gmail.com",
-    //     username:"demouser007",
-    // });
+// Google Auth
+require("./auth/google.js");
 
-    // let registeredUser = await User.register(fakeUser,"mypassword123"); // Convenience method to register a new user instance with a given password. Checks if username is unique.
-    res.send(registeredUser);
-}));
 
+app.get("/auth/google",
+            passport.authenticate('google',{scope:['profile','email']})
+);
+
+app.get("/auth/google/callback",
+            passport.authenticate('google',{ failureRedirect:"/signup",failureFlash:true,
+        successRedirect:"/user/profile"})
+);
 
 
 
@@ -144,3 +146,23 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
     console.log("Server is Listing On Port 3000.");
 });
+
+
+
+
+
+
+
+
+
+
+// Extra Code (But Helpful)
+// app.get("/demouser", wrapAsync(async (req, res) => {
+//     // let fakeUser = new User({
+//     //     email:"demouser@gmail.com",
+//     //     username:"demouser007",
+//     // });
+
+//     // let registeredUser = await User.register(fakeUser,"mypassword123"); // Convenience method to register a new user instance with a given password. Checks if username is unique.
+//     res.send(registeredUser);
+// }));

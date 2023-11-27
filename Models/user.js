@@ -11,6 +11,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    googleId:{
+        type:String,
+    },
+    name:{
+        type:String,
+    }
 });
 
 userSchema.plugin(passportLocalMongoose);

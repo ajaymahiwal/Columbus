@@ -4,7 +4,7 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const User = require("../Models/user.js");
 const passport = require("passport");
-const {saveRedirectUrl} = require("../middlewares/middleW.js");
+const {isLoggedIn,saveRedirectUrl} = require("../middlewares/middleW.js");
 
 
 const userController = require("../controllers/users.js");
@@ -28,7 +28,7 @@ router
 
 router.get("/logout",userController.logout);
 
-
+router.get("/user/profile",isLoggedIn,userController.userProfile);
 
 
 module.exports = router;

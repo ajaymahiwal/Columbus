@@ -8,7 +8,8 @@ module.exports.renderSignUp = (req, res) => {
 module.exports.signUp = async (req, res) => {
     try {
         let { email, username, password } = req.body;
-        const newUser = new User({ email, username });
+        let name = username;
+        const newUser = new User({ email, username, name });
         let registeredUser = await User.register(newUser, password);
 
         req.login(registeredUser,(err)=>{
@@ -48,4 +49,8 @@ module.exports.logout = (req,res)=>{
         req.flash("success","You Are Logged Out!");
         res.redirect("/listings");
     });
+}
+
+module.exports.userProfile = (req,res)=>{
+    res.send(`Welcome`);
 }
