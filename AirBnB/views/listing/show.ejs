@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= item.title %></title>
+    <%- include("../includes/head.ejs") %>
+    <link rel="stylesheet" href="/css/listing/style.css" />
+
+    <style>
+      .item-title {
+        margin: 0.5rem 0;
+      }
+
+      .item-address:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('../includes/header') %>
+
+    <div class="list-item w-100 no-border">
+      <div>
+        <h1 class="item-title"><%= item.title%></h1>
+        <div class="item-address">
+          <a
+            href="https://www.google.com/search?q=<%= item.location %>&<%= item.country %>"
+            target="_blank"
+          >
+            <%= item.location %>, <%= item.country%>
+          </a>
+        </div>
+        <!-- <h2> <%= item.price %> &#8377; </h2> -->
+      </div>
+      <img
+        src="<%= item.image.url %>"
+        alt="Listing Image Not Found"
+        class="list-img list-img-lg"
+      />
+    </div>
+
+    <div class="item-details-parent">
+      <div class="item-details">
+        <div class="section-1-item">
+          <h1>
+            Luxury stay in Dhonakulhi, Thiladhunmathee Uthuruburi, Maldives
+          </h1>
+          <p>12 guests4 bedrooms6 beds4.5 bathrooms</p>
+          <hr />
+          <p>
+            With direct access to the beach and lagoon, you’ll have no trouble
+            connecting with nature at this gorgeous island home. When you’re not
+            out exploring, settle into the sunken poolside lounge for cocktails,
+            grill up some fresh seafood on the barbeque, or relax in the steam
+            room while the kids splash around on the waterslide. Later, dine
+            alfresco and watch the sunset over the ocean.
+          </p>
+        </div>
+
+        <hr />
+
+        <div class="section-1-item">
+          <h1>
+            Luxury stay in Dhonakulhi, Thiladhunmathee Uthuruburi, Maldives
+          </h1>
+          <p>12 guests4 bedrooms6 beds4.5 bathrooms</p>
+          <hr />
+          <p>
+            With direct access to the beach and lagoon, you’ll have no trouble
+            connecting with nature at this gorgeous island home. When you’re not
+            out exploring, settle into the sunken poolside lounge for cocktails,
+            grill up some fresh seafood on the barbeque, or relax in the steam
+            room while the kids splash around on the waterslide. Later, dine
+            alfresco and watch the sunset over the ocean.
+          </p>
+        </div>
+
+        <hr />
+
+        <div class="section-1-item">
+          <h1>
+            Luxury stay in Dhonakulhi, Thiladhunmathee Uthuruburi, Maldives
+          </h1>
+          <p>12 guests4 bedrooms6 beds4.5 bathrooms</p>
+          <hr />
+          <p>
+            With direct access to the beach and lagoon, you’ll have no trouble
+            connecting with nature at this gorgeous island home. When you’re not
+            out exploring, settle into the sunken poolside lounge for cocktails,
+            grill up some fresh seafood on the barbeque, or relax in the steam
+            room while the kids splash around on the waterslide. Later, dine
+            alfresco and watch the sunset over the ocean.
+          </p>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price">₹15,72,565 night</div>
+        <div class="stay-info">
+           <div class="stay-dates">
+             <div class="stay-checks check-in">
+              <label for="c-in">CHECK-IN</label>
+             <input type="date" name="" id="c-in">
+             </div>
+             <div class="stay-checks check-out">
+              <label for="c-out">CHECK-OUT</label>
+              <input type="date" name="" id="c-out">
+             </div>
+           </div>
+            <select name="" id="" class="guest">
+              <option value="" disabled selected>Guest</option>
+              <option value="">2</option>
+              <option value="">2+</option>
+              <option value="">5+</option>
+              <option value="">10+</option>
+            </select>
+        </div>
+        <button class="reserve-btn">Reserve</button>
+        <p>You won't be charged yet</p>
+
+        <!-- <div>
+         <span>₹15,72,565 x 5 nights</span>
+         <span>₹78,62,826</span>
+        </div>
+
+        <hr>
+
+        <div>
+         <b><p>Total Before taxes</p>
+           <p>₹78,62,826</p></b>
+        </div> -->
+
+      </div>
+    </div>
+
+    <% if (item.category != "Not Yet Selected") { %>
+    <div>
+      <h1>Category:</h1>
+      <b><%= item.category %></b>
+    </div>
+    <% } %>
+
+    <div class="btns">
+      <a href="/listings/<%= item.id %>/edit" class="crud-btn btn-green"
+        >Edit Listing</a
+      >
+
+      <form action="/listings/<%= item.id %>?_method=delete" method="post">
+        <button class="crud-btn btn-red">Delete</button>
+      </form>
+    </div>
+
+    <hr />
+
+    <script></script>
+  </body>
+</html>

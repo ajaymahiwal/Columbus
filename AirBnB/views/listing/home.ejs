@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Airbnb | Holiday rentals, cabins, beach houses & more</title>
+    <!-- icon and common.css added in this head.ejs -->
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/listing/style.css">
+  </head>
+  <body>
+
+    <%- include('../includes/header') %>
+
+    <div class="flex-row">
+    <% for( list of listings ) { %>
+        <a class="list-item" href="/listings/<%= list._id %>">
+          <img src="<%= list.image.url %>" alt="" class="list-img">
+          <h2 class="list-name">  <%= list.title%> </h2>
+        </a>
+    <% } %>
+  </div>
+    
+  </body>
+</html>

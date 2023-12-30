@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+/* font-family: 'Lobster', sans-serif;
+font-family: 'Plus Jakarta Sans', sans-serif; */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  html,
+  body {
+    width: 100%;
+    /* height: 100dvh; */
+  }
+
+  li{
+    list-style: none;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+header{
+    width: 100%;
+    height: 5vw;
+    background-color: #FF385C;
+    margin-bottom: 2.5vw;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+
+header nav ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+li a{
+    font-size: 1.5rem;
+    transition: all 3s ease;
+}
+
+li a:hover{
+    text-decoration: underline black 3px;
+}
