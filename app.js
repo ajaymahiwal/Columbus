@@ -143,9 +143,9 @@ app.use((err, req, res, next) => {
     res.status(status).render("./list/error.ejs", { message });
 });
 
-let Host = `0.0.0.0`;
-app.listen(Host, () => {
-    console.log("Server is Listing On Port 3000.");
+const portAddress = process.env.HOST || 3000;
+app.listen(portAddress, () => {
+    console.log(`Server is Listing On Port ${portAddress}.`);
 });
 
 
