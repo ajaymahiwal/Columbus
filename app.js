@@ -143,9 +143,17 @@ app.use((err, req, res, next) => {
     res.status(status).render("./list/error.ejs", { message });
 });
 
-const portAddress = process.env.HOST || 3000;
-app.listen(portAddress, () => {
-    console.log(`Server is Listing On Port ${portAddress}.`);
+// const portAddress = process.env.HOST || 3000;
+// app.listen(portAddress, () => {
+//     console.log(`Server is Listing On Port ${portAddress}.`);
+// });
+
+// Use PORT provided in environment or default to 3000
+const port = process.env.PORT || 3000;
+
+// Listen on `port` and 0.0.0.0
+app.listen(port, "0.0.0.0", function () {
+    console.log(`Server is Listing On Port ${port}`);
 });
 
 
