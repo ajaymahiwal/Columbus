@@ -15,7 +15,7 @@ router
     .get(userController.renderSignUp)
     .post(wrapAsync(userController.signUp))
 
-
+ 
 
 router
     .route("/login")

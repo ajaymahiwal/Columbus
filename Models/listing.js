@@ -41,6 +41,18 @@ const listingSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:"User",
   },
+  createdAt:{
+      type: Date,
+      default: Date.now(),
+  },
+  sales:{
+      type: Number,
+      default: 0,
+  },
+  likes:{
+    type:Number,
+    default:0,
+  },
   geometry:{
       type: {
         type: String, // Don't do `{ location: { type: String } }`
@@ -51,6 +63,9 @@ const listingSchema = new mongoose.Schema({
         type: [Number],
         required: true
       }
+  },
+  category:{
+    type:[String],
   }
 });
 

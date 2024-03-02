@@ -1,7 +1,653 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Columbus | Holiday rentals, cabins, beach houses & more</title>
+    <%- include("../includes/head.ejs") %>
 
+    <style>
+        main{
+            padding-inline: 6%;
+            margin-top: 2.5rem;
+            /* margin-bottom: 2rem; */
+            /* padding-bottom: 5rem; */
+        }
+
+        #sec-1{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .title-hook{
+            text-align: center;
+            font-family: "Bebas Neue", sans-serif;
+            word-spacing: 5px;
+            letter-spacing: 2px;
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ff385c;
+        }
+
+        .setup-intro{
+            margin-top: 1rem;
+        }
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            /* height: 30vw; */
+        }
+
+        #sec-2{
+            margin-top: 7rem;
+        }
+        #sec-2 .title-hook{
+            text-align: left;
+        }
+        .setup-steps{
+          margin-top: 1rem;
+        }
+
+
+        #sec-3{
+            margin-top: 8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #sec-3 .title-hook{
+            text-align: center;
+            word-spacing: 0px;
+            letter-spacing: 0px;
+            margin-bottom: 0;
+            line-height: 2.6rem;
+            height: fit-content;
+        }
+        #sec-3 .title-hook + p{
+            text-align: center;
+            margin-top: 0;
+            line-height: 1;
+            font-family: 1.3rem;
+            font-weight: bold;
+        }
+        #cover{
+            color: black;
+        }
+        .protection-part h2{
+            text-align: center;
+        }
+
+        .our-protections{
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .our-protections > div{
+            width: 100%;
+            display: flex;
+            /* border: 2px solid red; */
+            padding: .5rem 0;
+            border-bottom: 2px solid rgb(80, 78, 78);
+        }
+        .our-protections > div > div{
+            text-align: center;
+            width: 8%;
+            flex-grow: 1;
+        }
+        .our-protections > div > div p{
+            margin-top: 1.5rem;
+        }
+        .our-protections > div > div > i{
+            font-size: 2.2rem;
+        }
+        .our-protections > div > div:nth-child(1){
+            flex-grow: 5;
+            text-align: left;
+        }
+
+        .our-vs-other{
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        #sec-4{
+            margin-top: 8rem;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #f7f7f7;
+            padding: 3rem 2rem;
+        }
+        #sec-4 > div{
+            width: 50%;
+            /* border: 2px solid red;    */
+        }
+        .sec-4-title{
+            font-weight: bold;
+        }
+        .ques{
+            padding-right: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ques i{
+            font-size: 1rem;
+        }
+        .ans{
+            height: 0;
+            overflow: hidden;
+            transition: all 2s;
+        }
+        .get-ans{
+            transition: all 2s;
+            height: auto;
+        }
+        .qna{
+            padding: .5rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid black;
+        }
+
+        .sec-5{
+            margin-top: 0;
+            background-color: #f7f7f7;
+            padding: 2rem 3rem 5rem;
+        }        
+        .still-ques{
+            background-color: white;
+            display: flex;
+        }
+        .still-ques > *{
+            width: 50%;
+        }
+        .still-ques img{
+            height: 25rem;
+            object-fit: contain;
+        }
+
+        .contact-us{
+            padding: 3rem 0;
+        }
+        .contact-us a{
+            text-decoration: none;
+            /* color: white; */
+        }
+        .contact-us > div{
+            /* background-color: #fa284f; */
+            width: fit-content;
+            font-size: 1.2rem;
+            padding: .4rem;
+            /* color: white; */
+            font-weight: bold;
+        }
+
+
+
+
+
+        /* Responsive */
+
+        @media(width<=900px){
+            .our-vs-other{
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+            .our-protections{
+            margin-top: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .our-protections > div{
+            width: 100%;
+            display: flex;
+            /* border: 2px solid red; */
+            padding: .5rem 0;
+            border-bottom: 2px solid rgb(80, 78, 78);
+        }
+        .our-protections > div > div{
+            text-align: center;
+            width: 15%;
+            flex-grow: 1;
+        }
+        .our-protections > div > div p{
+            margin-top: 1.5rem;
+        }
+        .our-protections > div > div > i{
+            font-size: 2.2rem;
+        }
+        .our-protections > div > div:nth-child(1){
+            flex-grow: 5;
+            text-align: left;
+        }
+
+
+        .sec-5{
+            margin-top: 0;
+            background-color: #f7f7f7;
+            padding: 2rem 2rem 5rem;
+        }        
+        .still-ques{
+            background-color: white;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .still-ques > *{
+            width: 100%;
+        }
+        .still-ques img{
+            width: 100%;
+            /* height: 25rem; */
+            object-fit: cover;
+        }
+
+        .contact-us{
+            /* border: 2px solid red; */
+            text-align: center;
+            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-us a{
+            text-decoration: none;
+            /* color: white; */
+        }
+        .contact-us > div{
+            /* background-color: #fa284f; */
+            width: fit-content;
+            font-size: 1.2rem;
+            padding: .4rem;
+            /* color: white; */
+            font-weight: bold;
+        }
+
+        }
+
+        @media(width<=800px){
+            .title-hook{
+            text-align: center;
+            font-family: "Bebas Neue", sans-serif;
+            word-spacing: 5px;
+            letter-spacing: 2px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff385c;
+        }
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            height: 40vw;
+        }
+        }
+
+        @media(width<=700px){
+            #sec-4 > div{
+            width: 100%;
+            /* border: 2px solid red;    */
+        }
+        }
+
+        @media(width<=650px){
+            
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            height: 55vw;
+        }
+        }
+        @media(width<=600px){
+            .our-protections > div > div{
+            text-align: center;
+            width: 22%;
+            flex-grow: 1;
+        }
+        }
+        @media(width<=550px){
+            
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            height: 65vw;
+        }
+        .title-hook{
+            font-size: 2.7rem;
+        }
+        #sec-3{
+            margin-top: 8rem;
+            display: flex;
+            flex-direction: column;
+            /* justify-content:start; */
+            align-items: start;
+        }
+   
+        .protection-part h2{
+            text-align: left;
+        }
+        #sec-3 .title-hook{
+            text-align: left;
+        }
+        #sec-3 .title-hook + p{
+            text-align: left;
+        }
+
+        .sec-5{
+            padding: 2rem 1rem 4rem;
+        }        
+
+    }
+
+
+        @media(width<=500px){
+            .our-protections > div > div{
+            text-align: center;
+            width: 25%;
+            flex-grow: 1;
+        }
+        .our-vs-other{
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .our-protections > div > div{
+            text-align: center;
+            width: 30%;
+            flex-grow: 1;
+        }
+        .our-protections > div > div h3{
+            font-size: 1.5rem;
+        }
+        .our-protections > div > div p{
+            margin-top: 1rem;
+        }
+
+        #sec-5 *{
+            font-size: 1rem;
+        }
+        #sec-5 h3{
+            font-size: 1.5rem;
+        }
+        }
+
+
+        
+        
+        @media(width<=450px){
+            
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            height: 80vw;
+        }
+        .setup-steps h4{
+            font-size: 1.4rem;
+        }
+        .setup-steps h4 + p{
+            font-size: .95rem;
+        }
+        .title-hook{
+            font-size: 2.4rem;
+        }
+
+
+
+        .our-protections > div > div h3{
+            font-size: 1rem;
+        }
+        
+        .our-protections > div > div > i{
+            font-size: 1.5rem;
+        }
+        .our-protections > div > div p{
+            display: none;
+        }
+        .our-vs-other{
+            text-align: center;
+            font-size: .9rem;
+        }
+        }
+
+
+        @media(width<=370px){
+            
+        .setup-intro img{
+            width: 100vw;
+            object-fit: cover;
+            height: 95vw;
+        }
+        .sec-5{
+            padding: 2rem .5rem 3rem;
+        }        
+        }
+        @media(width<330px){
+            .our-protections > div > div{
+            width: 33%;
+        }
+        }
+       
+    </style>
+</head>
 <body>
-    <% layout('/layouts/boilerplate') %>
-    <h1>Home Page</h1>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="navbar-par">
+        <a class="navbar-brand" href="/listings" id="main-logo-par">
+          <!-- <i class="fa-regular fa-compass"></i> -->
+        <img src="/img/main-logo.png" alt="" srcset="" id="main-logo">
+        <h4>Columbus</h4>
+        </a>
+        </div>
+      </nav>
+
+    
+    <main>
+        <section class="sec" id="sec-1">
+            <div class="">
+                <h1 class="title-hook">Columbus it.</h1>
+                <h1 class="title-hook">Discover the World with Columbus</h1>
+            </div>
+            <div class="setup-intro">
+                <img src="https://a0.muscache.com/im/pictures/65214d06-ffb4-4b70-93c0-01d368e76649.jpg?im_w=2560&im_q=highq" alt="">
+            </div>
+        </section>
+
+        <section class="sec" id="sec-2">
+            <div>
+                <h1 class="title-hook">List your space effortlessly with Columbus Setup</h1>
+            </div>
+            <div class="setup-steps">
+                <div>
+                    <h4>One-to-one guidance from a Superhost</h4>
+                    <p>We’ll match you with a Superhost in your area, who’ll guide you from your first question to your first guest – by phone, video call or chat.</p>
+                </div>
+                <div>
+                    <h4>An experienced guest for your first booking</h4>
+                    <p>For your first booking, you can choose to welcome an experienced guest who has at least three stays and a good track record on Columbus.</p>
+                </div>
+                <div>
+                    <h4>Specialised support from Columbus</h4>
+                    <p>New Hosts get one-tap access to specially trained Community Support agents who can help with everything from account issues to billing support</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec" id="sec-3">
+            <div>
+                <div class="title-hook">Colum<span id="cover">Cover</span>Bus</div>
+                <p>For Hosts</p>
+            </div>
+
+            <div class="protection-part">
+                <h2>Columbus it with top‑to‑bottom protection</h2>
+                <div class="our-protections">
+                    <div class="our-vs-other">
+                        <div></div>
+                        <div>Columbus</div>
+                        <div>Competitors</div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Guest identity verification</h3>
+                            <p>Our comprehensive verification system checks details such as name, address, government ID and more to confirm the identity of guests who book on Columbus.</p>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Reservation screening</h3>
+                            <p>Our proprietary technology analyses hundreds of factors in each reservation and blocks certain bookings that show a high risk for disruptive parties and property damage.</p>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>$3m damage protection</h3>
+                            <p>Columbus reimburses you for damage caused by guests to your home and belongings and includes these specialised protections:</p>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Art & valuables</h3>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Auto & boat</h3>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Pet damage</h3>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Income loss</h3>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>Deep cleaning</h3>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>$1m USD liability insurance</h3>
+                            <p>You’re protected in the rare event that a guest gets hurt or their belongings are damaged or stolen.</p>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                    </div>
+                    <div>
+                        <div>
+                            <h3>24-hour safety line</h3>
+                            <p>If you ever feel unsafe, our app provides one-tap access to specially trained safety agents, day or night.</p>
+                        </div>
+                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec" id="sec-4">
+            <div>
+                <h1 class="sec-4-title">Your questions, answered</h1>
+            </div>
+            <div id="all-questions">
+                <div class="qna">
+                    <div class="ques">
+                        <h4>Is my place right for Columbus?</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p class="ans">Columbus guests are interested in all kinds of places. We have listings for tiny homes, cabins, tree houses and more. Even a spare room can be a great place to stay.
+                    </p>
+                </div>
+                <div class="qna">
+                    <div class="ques">
+                        <h4>Do I have to host all the time?</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p class="ans">Not at all – you control your calendar. You can host once a year, a few nights a month or more often.
+                    </p>
+                </div>
+                <div class="qna">
+                    <div class="ques">
+                        <h4>How much should I interact with guests?</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p class="ans">It’s up to you. Some Hosts prefer to message guests only at key moments – like sending a short note when they check in – while others also enjoy meeting their guests in person. You’ll find a style that works for you and your guests.
+                    </p>
+                </div>
+                <div class="qna">
+                    <div class="ques">
+                        <h4>Any tips on being a great Airbnb Host?</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p class="ans">Getting the basics down goes a long way. Keep your place clean, respond to guests promptly and provide necessary amenities like fresh towels. Some Hosts like adding a personal touch such as putting out fresh flowers or sharing a list of local places to explore – but it’s not required.
+                    </p>
+                </div>
+                <div class="qna">
+                    <div class="ques">
+                        <h4>What are Columbus's fees?</h4>
+                        <i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p class="ans">Columbus typically collects a flat service fee of 3% of the reservation subtotal when you get paid. We also collect a fee from guests when they book. In many areas Airbnb also collects and pays sales and tourism taxes automatically on your behalf.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="sec sec-5" id="sec-5">
+                <div class="still-ques">
+                    <img src="https://a0.muscache.com/im/pictures/f1879cc3-6fbe-4285-8e61-44a814dd7fb8.jpg?im_w=1200&im_q=highq" alt="">
+                <div class="contact-us">
+                    <h3>Still have questions?</h3>
+                    <p>Get answers from an experienced Superhost near you.</p>
+                    <div>
+                        Contact Us: <a href="mailto:jaymahiwal007@gmail.com">jaymahiwal007@gmail.com</a>
+                    </div>
+                </div>
+                </div>
+        </section>
+    </main>
+
+
+    <%-include("../includes/footer") %>
+
+
+
+    <script>
+        let ques = document.getElementsByClassName("ques");
+
+        for(let i=0;i<ques.length;i++){
+            ques[i].addEventListener("click",(e)=>{
+                ques[i].nextElementSibling.classList.toggle("get-ans");
+                if(ques[i].children[1].classList.contains("fa-angle-up")){
+                    ques[i].children[1].setAttribute("class","fa-solid fa-angle-down");
+                }
+                else{
+                    ques[i].children[1].setAttribute("class","fa-solid fa-angle-up");
+                }
+            })
+        }
+    </script>
 </body>
+</html>

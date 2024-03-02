@@ -1,15 +1,53 @@
-
 <footer>
+  <div class="f-main-links">
+    <div>
+      <h5>Support</h5>
+      <a href="">Help Centre</a>
+      <a href="">ColumCoverBus</a>
+      <a href="">Anti-discrimination</a>
+      <a href="">Disability support</a>
+      <a href="">Report neighbourhood concern</a>
+    </div>
+    <div>
+      <h5>Hosting</h5>
+      <a href="">Columbus your home</a>
+      <a href="">ColumCoverBus for Hosts</a>
+      <a href="">Hosting resources</a>
+      <a href="">Community forum</a>
+      <a href="">Hosting responsibly</a>
+      <a href="">Join a free Hosting class</a>
+    </div>
+    <div>
+      <h5>Columbus</h5>
+      <a href="">Newsroom </a>
+      <a href="">New features</a>
+      <a href="">Careers</a>
+      <a href="">Investors</a>
+    </div>
+  </div>
+
+  <div class="our-info">
+    <div>
+        <p id="copy-right">Columbus Private Limited</p>
+        <ul class="privacy-links-etc">
+            <li>
+                <a href="">Privacy</a>
+                <a href="">Terms</a>
+                <a href="">AboutUs</a>
+            </li>
+        </ul>
+    </div>
     <div class="f-socail">
         <a href="">  <i class="fa-brands fa-square-facebook"></i>  </a>
         <a href="">  <i class="fa-brands fa-square-instagram"></i>  </a>
         <a href="">  <i class="fa-brands fa-linkedin"></i>  </a>
     </div>
-    <div class="f-brand">
-        &copy;WanderLust Private Limited.
-    </div>
-    <div class="f-links">
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-    </div>
+
+  </div>
 </footer>
+
+
+<script>
+    let copyRight = document.getElementById("copy-right");
+    copyRight.innerText = `© ${(new Date).getFullYear()} Columbus Private Limited`;
+</script>

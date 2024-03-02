@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
     },
     name:{
         type:String,
-    }
+    },
+    admin:{
+        type:Boolean,
+    },
 });
 
 userSchema.plugin(passportLocalMongoose);

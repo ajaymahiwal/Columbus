@@ -10,7 +10,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const ejsMate = require("ejs-mate");
+// const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
@@ -27,9 +27,9 @@ const userRouter = require("./routes/user.js");
 
 
 // const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
-const dbUrl = process.env.ATLASDB_URL;
+// const dbUrl = process.env.ATLASDB_URL;
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 main().then(() => {
@@ -42,7 +42,7 @@ main().then(() => {
 
 
 const store = MongoStore.create({
-    mongoUrl:dbUrl,
+    mongoUrl:process.env.ATLASDB_URL,
     crypto:{
         secret: process.env.SECRET,
     },
@@ -91,7 +91,7 @@ app.use(methodOverride("_method"));
 //setting for view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.engine("ejs", ejsMate);
+// app.engine("ejs", ejsMate);
 
 
 
@@ -119,7 +119,7 @@ app.get("/auth/google",
 );
 
 app.get("/auth/google/callback",
-            passport.authenticate('google',{ failureRedirect:"/signup",failureFlash:true,
+            passport.authenticate('google', { failureRedirect:"/signup",failureFlash:true,
         successRedirect:"/user/profile"})
 );
 

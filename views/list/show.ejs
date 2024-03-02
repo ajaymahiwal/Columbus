@@ -1,35 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= item.title %></title>
-    <link rel="shortcut icon" href="/img/favicon.jpg" type="image/x-icon" />
-
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-  </head>
-
   <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Show</title>
+      <title><%= item.title %></title>
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -139,12 +114,14 @@
     </head>
 
     <body>
-      <%-include('../includes/navbar.ejs')%> <% if (successMsg &&
+      <%-include('../includes/navbar.ejs')%> 
+      <% if (successMsg &&
       successMsg.length){ %>
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <%= successMsg %>
       </div>
-      <% } %> <% if (errorMsg && errorMsg.length){ %>
+      <% } %> 
+      <% if (errorMsg && errorMsg.length){ %>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <%= errorMsg %>
       </div>
@@ -339,4 +316,3 @@
       </script>
     </body>
   </html>
-</html>
