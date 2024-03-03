@@ -31,6 +31,10 @@ const listingSchema = new mongoose.Schema({
   price: Number,
   location: String,
   country: String,
+  avgRating:{
+    type:Number,
+    default:0,
+  },
   reviews : [
     {
       type: mongoose.Schema.Types.ObjectId,

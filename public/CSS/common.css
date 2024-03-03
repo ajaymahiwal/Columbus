@@ -19,8 +19,13 @@
 body{
     overflow-x: hidden;
 }
+
+.txt-cap{
+    text-transform: capitalize;
+}
 #main-logo-par{
     /* border: 2px solid red; */
+    color: #FF0000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,10 +55,11 @@ body{
 }
 
 .nav-link{
-    text-decoration: underline;
+    text-align: center;
     font-size: 1.2rem;
     font-weight: 500;
-    color: black !important
+    color: black !important;
+    padding: 5px 1rem;
 }
 .nav-link:hover{
     background-color: rgb(226, 226, 226);
@@ -64,6 +70,17 @@ body{
     font-size: 2.5rem;
 }
 
+
+@media(width<=990px){
+
+.nav-link{
+    padding: 5px 1rem;
+}
+#sign-up{
+    display: block;
+    width: 100%;
+}
+}
 
 
 
@@ -93,7 +110,7 @@ footer > * {
     display: flex;
     flex-wrap: wrap;    
     column-gap: 1rem;
-    row-gap: 2rem;
+    row-gap: 1.5rem;
     /* justify-content: space-around; */
 }
 .f-main-links{
@@ -108,27 +125,30 @@ footer > * {
 }
 
 .our-info{
+    margin-top: 1rem;
     width: 100%;
-    /* border: 2px solid black; */
     display: flex;
     flex-wrap: wrap;
     gap: 0;
     justify-content: space-between;
+    text-align: center;
 }
 .our-info > div{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    column-gap: 2rem;
+}
+.privacy-links-etc{
+    display: flex;
+    column-gap: 1rem;
 }
 
-.our-info ul li a{
-    margin-left: 1.5rem;
+
+footer div.f-socail{
+    flex-wrap: nowrap;
 }
-
-
-
 .f-socail i{
     font-size: 1.5rem;
     margin-left:1rem ;
@@ -150,15 +170,25 @@ footer > * {
 }
 
 @media(width<=500px){
-    ul.privacy-links-etc{
+
+    .our-main-info-links ul{
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
-        width: 9rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
-    .privacy-links-etc  ul li{
+    .our-main-info-links ul li{
+        width: 30%;
+    }
+    .our-main-info-links ul li a{
         width: 100%;
     }
-    .privacy-links-etc  ul li a{
+}
+
+@media(width<=470px){
+    .our-main-info-links ul li{
         width: 100%;
     }
 }

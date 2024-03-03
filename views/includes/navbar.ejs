@@ -11,20 +11,19 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <!-- <a class="nav-item nav-link " href="/">Home <span class="sr-only">(current)</span></a> -->
-        <a class="nav-item nav-link" href="/listings">Show All Listings</a>
-        <% if (currUser && currUser.admin) { %>
-          <a class="nav-item nav-link" href="/listings/new">Create New Listing</a>
+        <a class="nav-item nav-link" href="/listings">Show Places</a>
+        <% if (currUser) { %>
+          <a class="nav-item nav-link" href="/listings/new">Create New Place</a>
         <% } %>
-        <a class="nav-item nav-link" href="/experiences/online">Online Experiences</a>
+        <!-- <a class="nav-item nav-link" href="/experiences/online">Online Experiences</a> -->
       </div>
 
         <div class="user-in-out navbar-nav">
         <% if (!currUser) { %>
-          <a class="nav-item nav-link" href="/signup">Sign Up</a>
-          <span>/</span>
-          <a class="nav-item nav-link" href="/login">Log In</a>
+            <a class="nav-item nav-link" href="/signup" id="sign-up">Sign Up</a>
+            <!-- <a class="nav-item nav-link" href="/login">Log In</a> -->
         <% } else { %>
-          <!-- <a class="nav-item nav-link" href="/logout">Log Out</a> -->
+          <a class="nav-item nav-link" href="/logout">Log Out</a>
         <% } %>
       </div>
     </div>

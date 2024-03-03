@@ -8,6 +8,7 @@ module.exports.addNewReview = async(req,res)=>{
     let newReview = new Review(req.body.review);
     newReview.owner = req.user._id;
 
+    listing.avgRating = (newReview.rating + listing.avgRating);
     listing.reviews.push(newReview);
 
     let res1 = await newReview.save();
@@ -25,8 +26,18 @@ module.exports.destroyReview = async(req,res)=>{
     let {id,reviewId} = req.params;
     console.log("i am at review route and delete method.And Review Deleted.");
     
+
+    let listing = await Listing.findById(id);
+    let currReview = await Review.findById(reviewId);
+
+    listing.avgRating = (listing.avgRating - currReview.rating);
+
+    let res2 = await listing.save();
+
+    
     await Listing.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
     await Review.findByIdAndDelete(reviewId);
+
     req.flash("success","Review Deleted !");
 
     res.redirect(`/listings/${id}`);

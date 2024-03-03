@@ -1,7 +1,7 @@
 const Listing = require("../Models/listing.js");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
-const geocodingClient = mbxGeocoding({accessToken: mapToken});
+const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 module.exports.index = async (req, res) => {
     let list = await Listing.find({});
@@ -19,8 +19,8 @@ module.exports.renderNewListingForm = async (req, res) => {
 module.exports.createListing = async (req, res, next) => {
 
     let response = await geocodingClient.forwardGeocode({
-                    query: req.body.itemDetails.location,
-                    limit:1,
+        query: req.body.itemDetails.location,
+        limit: 1,
     }).send();
 
 
@@ -39,7 +39,7 @@ module.exports.createListing = async (req, res, next) => {
 
     item.geometry = response.body.features[0].geometry;
 
-    
+
     let savedItem = await item.save();
     console.log(savedItem);
     req.flash("success", "New Listing Added !");
@@ -77,8 +77,8 @@ module.exports.renderEditForm = async (req, res) => {
     }
 
     let OrgImgUrl = item.image.url;
-    OrgImgUrl = OrgImgUrl.replace("/upload","/upload/w_250");
-    
+    OrgImgUrl = OrgImgUrl.replace("/upload", "/upload/w_250");
+
     // console.log(item);
     res.render("./list/edit.ejs", { item, OrgImgUrl });
 }
@@ -89,6 +89,11 @@ module.exports.updateListing = async (req, res) => {
     if (!req.body.itemDetails) {
         next(new ExpressError(400, "Send Valid Data In Listing."))
     }
+    let response = await geocodingClient.forwardGeocode({
+        query: req.body.itemDetails.location,
+        limit: 1,
+    }).send();
+    req.body.itemDetails.geometry = response.body.features[0].geometry;
     let updatedItem = await Listing.findByIdAndUpdate(id, { ...req.body.itemDetails }, { runValidators: true, new: true });
 
 
