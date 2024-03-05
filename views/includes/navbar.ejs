@@ -13,7 +13,7 @@
         <!-- <a class="nav-item nav-link " href="/">Home <span class="sr-only">(current)</span></a> -->
         <a class="nav-item nav-link" href="/listings">Show Places</a>
         <% if (currUser) { %>
-          <a class="nav-item nav-link" href="/listings/new">Create New Place</a>
+          <a class="nav-item nav-link create-new" href="/listings/new">Create New Place</a>
         <% } %>
         <!-- <a class="nav-item nav-link" href="/experiences/online">Online Experiences</a> -->
       </div>
@@ -23,7 +23,11 @@
             <a class="nav-item nav-link" href="/signup" id="sign-up">Sign Up</a>
             <!-- <a class="nav-item nav-link" href="/login">Log In</a> -->
         <% } else { %>
-          <a class="nav-item nav-link" href="/logout">Log Out</a>
+          <!-- <a class="nav-item nav-link" href="/logout">Log Out</a> -->
+          <a class="nav-item nav-link" href="/user/profile/<%= currUser._id %>">
+            <!-- <i class="fa-solid fa-user fa-xl" style="color: #ff385c;"></i> -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255, 56, 92,1)"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
+          </a>
         <% } %>
       </div>
     </div>

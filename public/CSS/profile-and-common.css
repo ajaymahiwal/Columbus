@@ -1,0 +1,451 @@
+
+/* All the header and frequently used properties are defind in this css file Like*/
+/* Basic Config */
+/* Both Normal and simple Header */
+/* Properties used in many files also defined in this file*/
+/* And Most Imp ->  responsive code for both headers also present in this file*/
+/* Code Written Way in this file is given below*/
+/* 
+
+//First basic config
+
+//normal header code and dropdown's
+
+//responsive code for both headers etc.
+
+//more used properties yani classes etc.
+
+*/
+
+
+
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root{
+    --header-height:5rem !important;
+    --common-width:85%;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+body {
+    overflow: -moz-scrollbars-none;
+}
+
+body {
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: white;
+}
+
+.b{
+    border: 2px solid red;
+}
+.hide{
+    display: none;
+}
+#main-logo{
+    width: fit-content;
+    margin: 5px auto;
+    display: flex;
+    align-items: center;
+    /* border: 2px solid red; */
+}
+#main-logo .logo{
+    height: 1.8rem;
+    margin-right: .5rem;
+}
+#main-logo .logo-name{
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+    cursor:pointer;
+}
+button{
+    border: none;
+    cursor:pointer;
+}
+.bd{
+    border: 2px solid red;
+}
+.d-ul-w{
+    text-decoration: underline 2px double white;
+    text-transform: capitalize;
+}
+.d-ul-b{
+    text-decoration: underline 2px double black;
+    text-transform: capitalize;
+}
+#responsive-header{
+    display: none;
+}
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 0 5px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--header-height);
+    width: 100%;
+    padding: 1rem 0;
+}
+header nav{
+    width: var(--common-width);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96%;
+}
+
+header nav ul{
+    display: flex;
+    align-items: last baseline;
+    justify-content: space-around;
+    column-gap: 1.5rem; 
+    /* width: %; */
+}
+
+.ul-1 li a,button{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.ul-1 li button{
+    cursor: pointer;
+    border: none;
+    background-color: white;
+}
+
+.dashboard-link{
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: block;
+    color: #00a34d;
+    text-align: center;
+}
+
+#main-logo{
+    text-align: center;
+    margin: 1rem auto;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: baseline;
+}
+.logo{
+    font-size: 1.5rem !important;
+    color: #00a34d !important;
+}
+#all-tasks{
+    font-size: 1.3rem;
+    font-weight: 500;
+    display: block;
+    color: #00a34d;
+    text-align: center;
+}
+#all-tasks:hover{
+    text-decoration: underline 2px #00a34d;
+}
+.book-plan{
+    border-bottom: 2px dotted green;
+}
+
+.start-plan{
+    border: 2px solid #00a34d;
+    color: #00a34d;
+    font-weight: 500;
+    padding: 0.5rem 2vw;
+    border-radius: 20px;
+}
+
+
+.empty-for-header{
+    height: var(--header-height);
+}
+
+/* Responsive version of all above code and both headers, normal for non-logged user and simple-header for logged in use */
+
+
+
+@media (width<=1000px) {
+    :root{
+        --header-height:8vw;
+        
+    }
+  }
+
+  @media(width<=800px){
+    :root{
+        --header-height:10vw;
+        
+    }
+    
+  }
+  @media(width<=700px){
+    :root{
+        --header-height:11vw;
+        
+    }
+    
+  }
+  @media(width<=650px){
+    :root{
+        --header-height:12vw;
+        
+    }
+    #responsive-header{
+        display: block;
+        /* justify-content: space-between; */
+    }
+    .common-header{
+        display: none; 
+        /* older header hide ker diya */
+    }
+    
+    #responsive-header nav{
+        width: 100%;
+    }
+    header nav ul{
+        margin-inline: 16px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .top-header,.bottom-header{
+        width: 100%;
+    }
+    .bottom-header{
+        background-color:rgb(59, 58, 58);
+        margin-bottom: 7vw;
+        padding-bottom: 1rem;
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+    }
+    .bottom-header ul{
+        /* border: 2px solid red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom-header ul li{
+        margin-top: 5px;
+    }
+    #header-dashboard-btn{
+        margin: 5px auto !important;
+    }
+    .header-user-name{
+        font-size: 1.5rem;
+        color: #00a34d;
+        text-transform: capitalize;
+    }
+    .drop-btn{
+        padding: .3rem 1rem;
+    }
+    .logo{
+        color: white;
+        font-size: 1.8rem;
+    }
+    
+
+    /* Other DropDown Related */
+    .drop-out-par > div{
+        border: 2px solid #00a34d;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1vw;
+    }
+    .drop-out-par2 > div{
+        border: 2px solid #00a34d;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1vw;
+    }
+
+    
+  }
+  @media(width<=550px){
+    :root{
+        --header-height:16vw;
+        
+    }
+
+  }
+
+  @media(width<=500px){
+    :root{
+        --header-height:17vw;
+        
+    }
+
+  }
+
+  @media(width<=450px){
+    :root{
+        --header-height:20vw;
+    }
+    #main-logo .logo{
+        height: 1.5rem;
+    }
+    
+    #main-logo .logo-name{
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    .header-user-name{
+        font-size: 1.2rem;
+        color: #00a34d;
+        text-transform: capitalize;
+    }
+  }
+
+  @media(width<=400px){
+    :root{
+        --header-height:20vw;
+    }
+    
+
+  }
+  @media(width<=350px){
+    :root{
+        --header-height:24vw;
+    }
+    
+
+  }
+
+  @media(width<=320px){
+    :root{
+        --header-height:29vw;
+        
+    }
+    #main-logo .logo{
+        height: 1.5rem;
+    }
+    #main-logo .logo-name{
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+  }
+
+
+
+
+
+
+
+
+/*  //////  */
+/* Footer */
+/* //////  */
+
+/* see footer.css file */
+
+
+  /* Custom message  */
+  .error-msg{
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 1rem;
+    margin: 2vw 0;
+    padding: .3rem;
+  }
+  .success-msg{
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+    background-color:#00a34cb7 ;
+    border-radius: 1rem;
+    margin: 2vw 0;
+    padding: .3rem;
+  }
+
+  @media(width<=500px){
+    .error-msg{
+        font-size: 1.1rem;
+      }
+      .success-msg{
+        font-size: 1.1rem;
+      }
+  }
+  
+
+
+  /*  */
+  /* Other Common CSS */
+  /*  */
+  .main-title{
+    font-size: 2.5rem;
+    border-bottom: 2px solid black;
+    width: fit-content;
+}
+
+  .txt-cap{
+    text-transform: capitalize;
+  }
+  .imp-txt{
+    color: #00a34d;
+  }
+  .sec{
+    margin-top: 3vw;
+  }
+  .user-name{
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-right: 5px;
+  }
+  .green-btn-adv {
+    display: block;
+    margin: 2vw auto;
+    border: none;
+    border-radius: 3rem;
+    padding: 0.4rem 3.5rem;
+    color: white;
+    font-size: 1.3rem;
+    background-color: #00a34d;
+    width: fit-content;
+  }
+  @media(width<=800px){
+    .green-btn-adv{
+        padding: .2rem 3rem;
+      }
+  }
+  @media(width<=550px){
+    .green-btn-adv{
+        padding: .2rem 2rem;
+        font-size: 1.1rem;
+      }
+  }
+
+  .logo{
+    color: black;
+    font-size: 2.2rem;
+}

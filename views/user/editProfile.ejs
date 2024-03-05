@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= userProfile.name.toUpperCase() %> is editing profile</title>
+    <link rel="stylesheet" href="/css/profile-and-common.css">
+
+    <%- include("../includes/head") %>
+    <style>
+        main{
+            width: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-bottom: 10rem;
+            /* min-height: 90dvh; */
+        }
+        #sec-1{
+            display: flex;
+            flex-direction: column;
+            /* align-items: center;
+            justify-content: center; */
+            width: 100%;
+        }
+        form > div{
+            margin-top: 12px;
+        }
+        input,textarea,select{
+            width: 100%;
+            border: 1px solid rgb(51, 50, 50);
+            padding: 6px;
+            border-radius: 7px;
+            font-size: 1.2rem;
+        }
+        textarea{
+            padding: 1rem 1rem 1rem 1rem;
+        }
+        textarea::-webkit-scrollbar{
+            width: 0px !important;
+        }
+        label,option{
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        label{
+            padding-left: 5px;
+        }
+        /* Chromium & Safari*/
+        input[type="number"]::-webkit-inner-spin-button{
+            display: none;
+        }
+        
+        
+        .imp-txt{
+            font-size: 2.1rem;
+            text-align: center;
+            text-decoration: underline 2px double #00a34b;
+        }
+        #emailAcc + p{
+            display: none;
+            font-size: .9rem;
+            color: #00a34d;
+            font-weight: 500;
+        }
+        #emailAcc:focus + p{
+            display: block;
+        }
+        #contact + p{
+            display: none;
+            font-size: .9rem;
+            color: #00a34d;
+            font-weight: 500;
+        }
+        #contact:focus + p{
+            display: block;
+        }
+        .green-btn-adv{
+            margin-block: 2rem;
+        }
+
+
+        @media(width<=600px){
+            .green-btn-adv{
+            padding: .4rem 3rem;
+        }
+        }
+        @media(width<=450px){
+            input,textarea,select{
+            padding: 3px;
+            border-radius: 7px;
+            font-size: 1.2rem;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <%-include('../includes/navbar.ejs')%>
+
+    
+    <% if (successMsg && successMsg.length){ %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= successMsg %>  
+          </div>
+    <% } %>
+
+    <% if (errorMsg && errorMsg.length){ %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= errorMsg %>  
+          </div>
+    <% } %>
+    
+
+    <main>
+        <section class="sec" id="sec-1">
+            <h1 class="imp-txt txt-cap">Your Profile</h1>
+
+            <form action="/user/profile/<%= userProfile._id %>/edit?_method=PUT" method="post">
+                <div>
+                    <label for="">Name</label>
+                    <input type="text" name="user[name]" id="" value="<%= userProfile.name%>" required>
+                </div>
+                <div>
+                    <label for="">D.O.B.</label>
+                    <input type="date" name="user[dob]" id="" value="<%=userProfile.dob ? userProfile.dob.toISOString().substring(0,10) : ""%>">
+                </div>
+                <div>
+                    <label for="">Contact Number</label>
+                    <input type="number" name="user[contact_num]" id="contact" value="<%=userProfile.contact_num ? userProfile.contact_num : ""%>" placeholder="e.g. +917404177777">
+                    <p>Message : Please Also Add Country Code With Your Phone Number Unless You Will Not Get Reminders :(</p>
+                </div>
+                <div>
+                    <label for="">Email Account</label>
+                    <input type="email" name="user[email]" id="emailAcc" value="<%=userProfile.email ? userProfile.email : ""%>" required>
+                    <p>Note : It Is Additional Email. Changing Email Will Not Change Your Username Email.</p>
+                </div>
+                
+                <div>
+                <label for="gender">Gender</label>
+                <select name="user[gender]" id="gender">
+                    <option value="default" selected disabled>-- Select Your Gender --</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                </div>
+                <div>
+                    <label for="">Your Profile Image URL</label>
+                    <input type="text" name="user[image]" id="" value="<%=userProfile.image ? userProfile.image : ""%>">
+                </div>
+                <div>
+                    <label for="">Your Profile Bio</label>
+                    <textarea name="user[bio]" id="" cols="30" rows="7" maxlength="500"><%=userProfile.bio ? userProfile.bio : "Hii 👋, Write Your Bio Here 👀" %></textarea>
+                </div>
+                <button class="green-btn-adv">Save</button>
+            </form>
+        </section>
+    </main>
+
+
+
+
+    <script>
+
+        let gender = document.querySelector("#gender");
+        let genValue = "<%= userProfile.gender%>";
+        if(genValue){
+            for(let i=0;i<gender.children.length;i++){
+                let optionVal = gender.children[i].getAttribute("value");
+                // console.log(optionVal)
+                if(optionVal == genValue){
+                    gender.children[i].setAttribute("selected","");
+                }
+            }
+        }
+        
+
+    </script>
+</body>
+</html>

@@ -5,12 +5,14 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const {listingSchema} = require("../SchemaValidation.js")
 const {isLoggedIn,isOwner} = require("../middlewares/middleW.js");
+const isVaildID = require("../middlewares/isValidID.js")
 
 const listingController = require("../controllers/listings.js");
 const multer  = require('multer');
 const {storage} = require("../cloudConfig.js");
 const upload = multer({ storage });
-    
+
+
 
  
 const validateListingData = (req,res,next)=>{
@@ -49,14 +51,16 @@ router.get("/new",
 //Show One (Read)
 router
     .route("/:id")
-    .get(wrapAsync(listingController.showOneListing))
+    .get(isVaildID,wrapAsync(listingController.showOneListing))
     .put(
+        isVaildID,
         isLoggedIn,
         isOwner,
         upload.single('itemDetails[image][url]'),
         validateListingData,
         wrapAsync(listingController.updateListing))
     .delete(
+        isVaildID,
         isLoggedIn,
         isOwner,
         wrapAsync(listingController.destroyListing));
@@ -65,6 +69,7 @@ router
 
 // Render EDIT form
 router.get("/:id/edit",
+            isVaildID,
             isLoggedIn,
             isOwner, 
             wrapAsync(listingController.renderEditForm));

@@ -1,55 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="shortcut icon" href="/img/favicon.jpg" type="image/x-icon">
-    <link rel="shortcut icon" href="/img/favicon.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Login With Columbus</title>
+    <%- include("../includes/head.ejs") %>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/CSS/common.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+        .main-form{
+            width: 80vw;
+            /* border: 2px solid red; */
+            margin: 6vw auto 0;
+            /* min-height: 100dvh; */
         }
-
-        html,
-        body {
-            width: 100%;
-            height: 100%;
+        .form-title{
+            font-size: 3rem;
+            text-align: center;
         }
-
         form{
-            margin: 0 auto;
-            width: 50%;
+            margin-top: 1vw;
+            /* border: 2px solid blue; */
         }
-        #button{
+        form input{
+            width: 100%;
+            padding: 2px 0;
+            font-size: 1.2rem;
+        }
+        input{
+            border: 1px solid rgb(92, 91, 91);
+        }
+        form > div{
+            margin-top: .7vw;
+        }
+        label{
+            font-size: 1.5rem;
+        }
+
+        .main-form button{
             display: block;
+            border: none;
             margin: 1rem auto;
+            padding: .3rem 10%;
+            font-size: 1.3rem;
+            background-color: #ff385c;
+            color: white;
+            border-radius: 3rem;
         }
-        h1{
-        text-align: center;
+        .main-form button:hover{
+            background-color: #f52349;
+        }
+        .account-yes-or-not{
+            text-align: center;
+            margin-top: 5px;
+        }
+        .ref-links{
+            color: #06863e;
+            font-weight: 500;
+            text-decoration: underline #06863e;
+        }
+        .plan-holder-yt-iframe{
+            margin: 2vw auto;
+            width: fit-content;
+        }
+        iframe{
+            border-radius: 10px;
+            width: 55vw;
+            height: 30vw;
+        }
+        .plan-holder-yt-iframe > div{
+            margin-top: 1vw;
+            text-align: center;
+        }
+        .plan-holder-yt-iframe a:nth-child(1){
+            padding-right: 5px;
+            border-right: 2px solid black;
+        }
+        .awards{
+            margin: 1rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 80vw;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .awards div{
+            width: 15vw;
+            height: 15vw;
+            background-color: rgba(137, 43, 226, 0.459);
+        }
+        .or-main{
+            text-align: center;
+            width:85%;
+            margin: .7rem auto;
+            font-size: 1.2rem;
+        }
+        .or-main span{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+        }
+        .or-main span::before{
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            margin: auto 0;
+        }
+        .or-main span::after{
+            content: "";
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: black;
+            margin: auto 0;
+          
+        }
+        
+        .login-with-google{
+            text-align: center;
+            width: 25%;
+            font-size: 1.3rem;
+            margin: 0 auto;
+            background-color:red;
+            color: white;
+            padding-block: 4px;
+            border-radius: 2rem;
+        }
+        .login-with-google a{
+            color: white;
+        }
+        .login-with-google:hover{
+            background-color: rgb(245, 25, 25);
+        }
+
+        #integration{
+            width: 80%;
+            margin: 3rem auto;
+        }
+
+
+
+
+        /* responive part */
+        @media(width<=1000px){
+            .login-with-google{
+                width: 40%;
+            }
+        }
+        @media(width<=700px){
+            .login-with-google{
+                width: 50%;
+            }
+        }
+        @media(width<=550px){
+            .login-with-google{
+                width: 65%;
+            }
+        }
+        @media(width<=400px){
+            .login-with-google{
+                width: 70%;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media(width<=600px){
+            input,label{
+                padding: 1px;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+            input{
+                font-weight: 350;
+            }
+            .main-form button{
+            padding: .5rem 2rem;
+            font-size: 1.2rem;
+        }
+        }
+
+        @media(width<=450px){
+            .plan-holder-yt-iframe{
+            margin: 2vw auto;
+            width: fit-content;
+        }
+        iframe{
+            border-radius: 10px;
+            width: 80vw;
+            height: 40vw;
+        }
+        .plan-holder-yt-iframe > div{
+            margin-top: 1vw;
+            text-align: center;
+        }
+        .plan-holder-yt-iframe a:nth-child(1){
+            padding-right: 5px;
+            border-right: 2px solid black;
+        }
+        .awards{
+            margin: 1rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 90vw;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .awards div{
+            width: 20vw;
+            height: 20vw;
+            background-color: rgba(137, 43, 226, 0.459);
+        }
+
+        .main-form button{
+            padding: .4rem 2rem;
+            font-size: 1.1rem;
+        }
+        .form-title{
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        }
+
+        footer{
+            margin-top: 7rem;
         }
     </style>
 </head>
-
 <body>
+    <%- include("../includes/navbar.ejs") %>
 
-    <%-include('../includes/navbar.ejs')%>
+ 
+    <% if (currUser) { %>
+        <p class="alert alert-success alert-dismissible fade show">Great, You Are Logged In.</p>
+       <% } %>
 
-    <h1 class="mt-3">Login Page</h1>
-    
-    <% if (successMsg && successMsg.length){ %>
+       <% if (successMsg && successMsg.length){ %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <%= successMsg %>  
           </div>
@@ -61,8 +249,11 @@
           </div>
     <% } %>
 
-        <form class=" g-3 needs-validation" novalidate method="post" action="/login">
 
+
+    
+        <form class="main-form g-3 needs-validation" novalidate method="post" action="/login">
+            <h1 class="form-title">Join Columbus: Review and Explore!</h1>
             <div class="">
                 <label for="validationCustom02" class="form-label">UserName:</label>
                 <input type="text" class="form-control" id="validationCustom02" name="username" required>
@@ -79,25 +270,24 @@
             </div>
 
             <div class="col-12">
-                <button class="btn btn-primary" id="button" type="submit">Submit form</button>
+                <button class="btn btn-primary" id="button" type="submit">Log In</button>
             </div>
         </form>
 
-        <h1> <a href="/auth/google">Login Using Google</a>  </h1>
+        <div class="or-main"><span> Or </span></div>
+        <div class="login-with-google"><a href="/auth/google" class="login-with-"><i class="ri-google-fill"></i> Log In With Google</a></div>
+        
+        <p class="account-yes-or-not">Don't have a Columbus account yet? <a href="/signup" class="ref-links">Sign up</a></p>
+    </div>
 
-        <%-include('../includes/footer.ejs')%>
+    <div class="plan-holder-yt-iframe">
+        <iframe src="https://www.youtube.com/embed/Oxbde2OeBx4?si=AX5juvocI9JAlJXO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div>
+            <a href="" class="ref-links">Watch more videos</a>
+            <a href="" class="ref-links">Getting Started</a>
+        </div>
+    </div>
 
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="/JS/common.js"></script>
+    <%- include("../includes/footer") %>
 </body>
-
 </html>

@@ -3,7 +3,7 @@ if (process.env.NODE_ENV != "production") {
     require('dotenv').config()
     // console.log(process.env) // remove this after you've confirmed it is working
 }
- 
+
 
 const express = require("express");
 const app = express();
@@ -33,8 +33,8 @@ async function main() {
 }
 
 main().then(() => {
-        console.log("Connected With WanderLust DB");
-    })
+    console.log("Connected With WanderLust DB");
+})
     .catch((err) => {
         console.log(err);
     });
@@ -42,15 +42,15 @@ main().then(() => {
 
 
 const store = MongoStore.create({
-    mongoUrl:process.env.ATLASDB_URL,
-    crypto:{
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
         secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600, // 24 Hours = 1 Day
 });
 
-store.on("error",()=>{
-    console.log("Error in MongoSession Store",error);
+store.on("error", () => {
+    console.log("Error in MongoSession Store", error);
 });
 
 const sessionOptions = {
@@ -95,9 +95,6 @@ app.set("views", path.join(__dirname, "views"));
 
 
 
-
-
-
 //Endpoints (Routes)
 
 app.get("/", (req, res) => {
@@ -110,17 +107,29 @@ app.use("/listings", listingRouter);
 app.use("/", userRouter);
 
 
+// (req,res,next)=>{
+//     if(req.isAuthenticated()) {
+//         console.log('User logged in successfully');
+//         return next();
+//     }else{
+//         req.flash("error","You Must Be Logged In Before Using This !");
+//         res.redirect("/login");
+//     }
+// }
+
 // Google Auth
 require("./auth/google.js");
 
 
 app.get("/auth/google",
-            passport.authenticate('google',{scope:['profile','email']})
+    passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 app.get("/auth/google/callback",
-            passport.authenticate('google', { failureRedirect:"/signup",failureFlash:true,
-        successRedirect:"/user/profile"})
+    passport.authenticate('google', {
+        failureRedirect: "/signup", failureFlash: true,
+        successRedirect: "/user/profile"
+    })
 );
 
 

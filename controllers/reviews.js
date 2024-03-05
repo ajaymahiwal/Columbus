@@ -1,12 +1,14 @@
 
 const Review = require("../Models/review.js");
 const Listing = require("../Models/listing.js");
+const ExpressError = require("../utils/ExpressError.js")
 
 
 module.exports.addNewReview = async(req,res)=>{
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
     newReview.owner = req.user._id;
+    newReview.postId = req.params.id;
 
     listing.avgRating = (newReview.rating + listing.avgRating);
     listing.reviews.push(newReview);
@@ -41,4 +43,21 @@ module.exports.destroyReview = async(req,res)=>{
     req.flash("success","Review Deleted !");
 
     res.redirect(`/listings/${id}`);
+}
+
+module.exports.allReviewsOfListing = async(req,res,next)=>{
+    let {id} = req.params;
+    let item = await Listing.findById(id).populate({
+        path: "reviews",
+        populate: {
+            path: "owner",
+        },
+    })
+        .populate("owner");
+
+    if(item){
+        res.render("./list/allReviewsOfListing.ejs",{item});
+    }else{
+        return next(new ExpressError("Listing Does't Exist my dear :)"));
+    }
 }

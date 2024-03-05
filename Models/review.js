@@ -17,6 +17,9 @@ const reviewSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
     },
+    postId:{
+        type:String,
+    }
 });
 
 const Review = mongoose.model("UserReview",reviewSchema);

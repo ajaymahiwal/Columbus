@@ -101,18 +101,18 @@
     <!-- <a href="/listings/new" class="btn">Create New Listing</a> -->
 
     <div class="all-cards" id="all-cards">
-      <% for( item of list ) { %>
-      <a href="/listings/<%= item._id %>" class="one-card">
+      <% for( let i = list.length-1;i>=0;i-- ) { %>
+      <a href="/listings/<%= list[i]._id %>" class="one-card">
         <div class="card col">
           <img
             class="card-img-top"
-            src="<%= item.image.url %>"
+            src="<%= list[i].image.url %>"
             alt="Card image cap"
           />
           <div class="card-img-overlay"></div>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= item.title %></h5>
+          <h5 class="card-title"><%= list[i].title %></h5>
           <!-- <p class="card-text">
             &#8377; item.price.toLocaleString("en-IN") %> /night
           </p> -->

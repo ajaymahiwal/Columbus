@@ -11,6 +11,9 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    username:{
+        type:String,
+    },
     googleId:{
         type:String,
     },
@@ -19,6 +22,31 @@ const userSchema = new mongoose.Schema({
     },
     admin:{
         type:Boolean,
+    },
+    dob:{
+        type:Date,
+    },
+    gender:{
+        type:String,
+    },
+    contact_num:{
+        type:String,
+    },
+    bio:{
+        type:String,
+    },
+    image: {
+        type: String,
+        default:
+            "https://img.freepik.com/free-vector/cute-happy-smiling-child-isolated-white_1308-32243.jpg",
+        set: (v) =>
+            v === ""
+                ? "https://img.freepik.com/free-vector/cute-happy-smiling-child-isolated-white_1308-32243.jpg"
+                : v,
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now(),
     },
 });
 

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= item.title %>'s reviews</title>
+    <%-include("../includes/head.ejs") %>
+  </head>
+
+  <style>
+    .btn {
+      display: inline-block;
+      background-color: rgba(241, 38, 38, 0.89);
+      padding: 0.2rem 1.5rem;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: white;
+      margin: 2rem 0;
+    }
+    .edit-btn {
+      background-color: rgb(14, 212, 14);
+    }
+    .btn:hover {
+      color: black;
+    }
+    .save-btn {
+      background-color: rgb(14, 212, 14);
+      padding: 0.3rem 3rem;
+      font-size: 1.1rem;
+    }
+    .del-btn {
+      background-color: red;
+      border: none;
+      margin-bottom: 0 !important;
+    }
+
+    .new-card {
+      margin: 2rem auto;
+      width: 80%;
+    }
+    .new-card img {
+      width: 100%;
+      height: 70vh;
+      /* object-fit: fill; */
+      object-fit: cover;
+    }
+    .new-card h1 {
+      padding: 0 1rem;
+    }
+    .main-btns {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .read-more {
+      text-decoration: underline;
+    }
+    .read-more:hover {
+      color: blue;
+    }
+
+    .hide {
+      display: none;
+    }
+    .main-txt{
+        margin: 4rem 0 2rem;
+        text-decoration: underline;
+    }
+
+
+
+    @media (width<=600px) {
+      .main-btns {
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+    .card {
+      border: none !important;
+    }
+    #main-card {
+      /* border: 2px solid red !important; */
+      margin-top: 3rem !important;
+    }
+
+    .rating-section {
+      width: 80%;
+      margin: 0 auto;
+    }
+    .form-range {
+      width: 100%;
+    }
+    .review-card {
+      border: 2px solid black !important;
+      margin: 1rem;
+    }
+    .main-cards {
+      justify-content: center;
+    }
+
+    .comment {
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+
+    #map {
+      width: 100%;
+      height: 300px;
+    }
+    .map-col {
+      width: 80%;
+      margin: 2vw auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .location-name {
+      width: fit-content;
+      background-color: yellow;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    main{
+        min-height: 90dvh;
+    }
+
+    footer{
+        margin-top: 10rem;
+    }
+  </style>
+  <body>
+    <%-include("../includes/navbar.ejs") %>
+
+    <main>
+        <section id="sec-0">
+            <h1 class="main-txt text-center" id="item-title"><%= item.title %>'s ALL Reviews</h1>
+        </section>
+        <section id="sec-1">
+            <% if(item.reviews.length > 0) {%>
+                <div class="rating-section">
+                  <div class="row main-cards">
+                    <% for(let i=item.reviews.length-1;i>=0;i--) {%> 
+                    <% if (item.reviews[i]) { %>
+                    <div class="card col-lg-5 review-card">
+                      <div class="card-body">
+                        <h3 class="card-title">
+                          <a href="/user/profile/<%= item.reviews[i].owner._id %>"
+                            >@<%= item.reviews[i].owner.name %></a
+                          >
+                        </h3>
+                        <p
+                          class="starability-result"
+                          data-rating="<%= item.reviews[i].rating%>"
+                        ></p>
+            
+                        <div id="user-review-comment">
+                          <% if (item.reviews[i].comment.length > 100) { %>
+                          <p class="card-text">
+                            <%= item.reviews[i].comment.substring(0,200) %>
+                          </p>
+                          <p class="card-text hide"><%= item.reviews[i].comment%></p>
+                          <div class="read-more">Read More</div>
+                          <% }else{ %>
+                          <p class="card-text"><%= item.reviews[i].comment %></p>
+                          <% } %>
+                        </div>
+            
+                        <% if (currUser && currUser._id.equals(item.reviews[i].owner._id)) {%>
+                        <form
+                          action="/listings/<%=item._id%>/reviews/<%=item.reviews[i]._id%>?_method=DELETE"
+                          method="post"
+                        >
+                          <button class="btn del-btn">Delete</button>
+                        </form>
+                        <% } %>
+                      </div>
+                    </div>
+                    <% } %> 
+                <% } %> 
+                
+                  </div>
+                </div>
+                <%}%>            
+        </section>
+    </main>
+
+
+    <%- include("../includes/footer") %>
+
+
+    <script>
+        let itemTitle = document.getElementById("item-title");
+
+        itemTitle.addEventListener("click",(e)=>{
+            window.location.href = `/listings/<%=item._id%>`;
+        })
+    </script>
+  </body>
+</html>

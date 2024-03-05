@@ -20,8 +20,9 @@ passport.use(new GoogleStrategy({
                 user = new User({
                     email: profile.emails[0].value,
                     googleId: profile.id,
-                    username: profile.emails[0].value.replace("@gmail.com","-kqOi-"),
+                    username: profile.emails[0].value,
                     name: profile.displayName,
+                    image:profile.photos[0].value,
                 });
 
                 await user.save();

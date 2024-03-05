@@ -7,28 +7,34 @@
       <title><%= item.title %> Place On Columbus</title>
       <%- include("../includes/head")%>
       <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
-        html,
-        body {
-          width: 100%;
-          height: 100%;
-        }
+        
 
         .btn {
           display: inline-block;
           background-color: rgba(241, 38, 38, 0.89);
-          padding: 0.5rem 2rem;
+          padding: 0.2rem 1.5rem;
           font-size: 1.2rem;
           text-decoration: none;
           color: white;
           margin: 2rem 0;
         }
+        .edit-btn{
+          background-color: rgb(14, 212, 14);
+        }
+        .btn:hover{
+          color: black;
+        }
+        .save-btn{
+          background-color: rgb(14, 212, 14);
+          padding: .3rem 3rem;
+          font-size: 1.1rem;
+        }
+        .del-btn{
+          background-color: red;
+          border: none;
+          margin-bottom: 0 !important;
+        }
+
 
         .new-card {
           margin: 2rem auto;
@@ -47,12 +53,39 @@
           display: flex;
           justify-content: space-around;
         }
+
+
+        .read-more{
+          text-decoration: underline;
+        }
+        .read-more:hover{
+          color: blue;
+        }
+
+        .hide{
+          display: none;
+        }
+        .see-all-reviews{
+          font-size: 1.2rem;
+          background-color: #ff385c;
+          border-radius: 1.5rem;
+          padding: .3rem 1rem;
+          color: white;
+          margin: 2rem 0;
+        }
+
+
+
+
+
         @media (width<=600px) {
           .main-btns {
             flex-direction: column;
           }
           .btn {
-            width: 100%;
+            width: 70%;
+            display: block;
+            margin: 1rem auto;
           }
         }
         .card {
@@ -127,11 +160,12 @@
         <img src="<%= item.image.url %>" class="card-img-top" alt="item-img" />
 
         <div class="card-body">
-          <p class="card-text txt-cap">Created By: <%= item.owner.username %></p>
+
+          <p class="card-text txt-cap">Created By:<a href="/user/profile/<%= item.owner._id %>">@<%= item.owner.name %></a></p>
           <p class="card-text txt-cap"><%= item.description %></p>
           <p class="card-text txt-cap location"><%= item.location %>, <%= item.country %></p>
           <p class="card-text txt-cap location-name">Avg. Rating: <% if (item.avgRating > 0) { %>
-            <%= (item.avgRating)/item.reviews.length %>
+            <%= ((item.avgRating)/item.reviews.length).toFixed(1) %>
           <% } else{%>
           0 , Because No Review Is Present.
             <% } %>
@@ -144,11 +178,11 @@
 
       <% if (currUser && currUser._id.equals(item.owner._id)) { %>
       <div class="main-btns">
-        <a href="/listings/<%= item._id %>/edit" class="btn"
+        <a href="/listings/<%= item._id %>/edit" class="btn edit-btn"
           >Edit This Place</a
         >
         <form action="/listings/<%= item.id %>?_method=DELETE" method="post">
-          <button class="btn">Delete This Place</button>
+          <button class="btn del-btn">Delete This Place</button>
         </form>
       </div>
       <% } %> <% if (currUser) { %>
@@ -221,6 +255,7 @@
               cols="30"
               rows="5"
               class="form-control"
+              maxlength="700"
               required
             ></textarea>
             <div class="invalid-feedback">
@@ -228,34 +263,58 @@
             </div>
           </div>
 
-          <button class="btn btn-outline-dark">Submit</button>
+          <button class="btn save-btn">Save</button>
         </form>
       </div>
-      <% } %> <% if(item.reviews.length > 0) {%>
+      <% } %> 
+      
+      
+      <% if(item.reviews.length > 0) {%>
       <div class="rating-section">
-        <h3>All Reviews</h3>
+        <h3 class="text-center">Place Reviews</h3>
         <div class="row main-cards">
-          <% for(review of item.reviews) {%>
-          <div class="card col-lg-3 review-card">
-            <div class="card-body">
-              <h3 class="card-title">@<%= review.owner.username %></h3>
-              <p class="card-text"><%= review.comment %></p>
-              <p
-                class="starability-result"
-                data-rating="<%= review.rating%>"
-              ></p>
-
-              <% if (currUser && currUser._id.equals(review.owner._id)) { %>
-              <form
-                action="/listings/<%=item._id%>/reviews/<%=review._id%>?_method=DELETE"
-                method="post"
-              >
-                <button class="btn btn-outline-dark">Delete</button>
-              </form>
-              <% } %>
+          <% for(let i=item.reviews.length-1;i>=item.reviews.length-4;i--) {%>
+          <% if (item.reviews[i]) { %>
+            <div class="card col-lg-5 review-card">
+              <div class="card-body">
+                <h3 class="card-title"><a href="/user/profile/<%= item.reviews[i].owner._id %>">@<%= item.reviews[i].owner.name %></a></h3>
+                <p
+                  class="starability-result"
+                  data-rating="<%= item.reviews[i].rating%>"
+                ></p>
+  
+                <div  id="user-review-comment">
+                  <% if (item.reviews[i].comment.length > 100) { %>
+                   <p class="card-text">
+                      <%= item.reviews[i].comment.substring(0,200) %>
+                   </p>
+                   <p class="card-text hide">
+                    <%= item.reviews[i].comment%>
+                 </p>
+                   <div class="read-more">Read More</div>
+                  <% }else{ %>
+                      <p class="card-text">
+                         <%= item.reviews[i].comment %>
+                      </p>
+                      <% } %>
+                </div>
+                
+  
+                <% if (currUser && currUser._id.equals(item.reviews[i].owner._id)) { %>
+                <form
+                  action="/listings/<%=item._id%>/reviews/<%=item.reviews[i]._id%>?_method=DELETE"
+                  method="post"
+                >
+                  <button class="btn del-btn">Delete</button>
+                </form>
+                <% } %>
+              </div>
             </div>
-          </div>
           <% } %>
+          <% } %>
+          <% if (item.reviews.length > 4) { %>
+            <a href="/listings/<%= item._id %>/reviews" class="see-all-reviews">See ALL Reviews</a>
+           <% } %>
         </div>
       </div>
       <%}%>
@@ -297,6 +356,23 @@
                         `<h3>${listingg.title}</h3><p>Exact Location Will Be Provided After Booking !!</p>`)
                   )
                   .addTo(map);
+      </script>
+
+
+      <script>
+        //for review
+
+        let readMoreBtns = document.getElementsByClassName("read-more");
+
+        for(let i=readMoreBtns.length-1;i>=0;i--){
+          readMoreBtns[i].addEventListener("click",(e)=>{
+            const myPreviousSibling = readMoreBtns[i].previousElementSibling;
+
+           myPreviousSibling.previousElementSibling.classList.toggle("hide");
+            
+            readMoreBtns[i].previousElementSibling.classList.toggle("hide");
+          })
+        }
       </script>
     </body>
   </html>

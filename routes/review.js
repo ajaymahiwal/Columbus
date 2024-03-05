@@ -6,6 +6,7 @@ const {reviewSchema} = require("../SchemaValidation.js")
 const Listing = require("../Models/listing.js");
 const Review = require("../Models/review.js");
 const {isLoggedIn} = require("../middlewares/middleW.js");
+const isValidId = require("../middlewares/isValidID.js");
 
 const reviewController = require("../controllers/reviews.js");
 
@@ -52,6 +53,10 @@ router.delete("/:reviewId",
                 wrapAsync(reviewController.destroyReview)
             );
 
+
+
+            // listings/:id/reviews
+router.get("/",isValidId,wrapAsync(reviewController.allReviewsOfListing));
 
 
 module.exports = router;
