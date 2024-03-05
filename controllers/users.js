@@ -21,7 +21,7 @@ module.exports.signUp = async (req, res) => {
             }
             console.log(registeredUser);
             req.flash("success", "Welcome To Columbus :)");
-            res.redirect("/listings");
+            res.redirect("/");
         });
 
     }
@@ -39,7 +39,12 @@ module.exports.renderLogin = (req, res) => {
 
 module.exports.login = async (req, res) => {
     req.flash("success", "Welcome To Columbus! You are logged in !");
-    res.redirect(res.locals.redirectUrl);
+    
+    if(res?.locals?.redirectUrl){
+        res.redirect(res.locals.redirectUrl);
+    }else{
+        res.redirect(`/user/profile/${req.user.id}`);
+    }
 }
 
 
@@ -50,7 +55,7 @@ module.exports.logout = (req, res) => {
         }
 
         req.flash("success", "You Are Logged Out!");
-        res.redirect("/listings");
+        res.redirect("/");
     });
 }
 

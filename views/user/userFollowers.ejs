@@ -570,11 +570,9 @@
         </div>
 
         <div class="user-stat">
-          <div id="post-sec">
-              <a href="#posts" class="posts-ref">
+          <div id="post-sec"  class="posts-ref">
               <div><%= (postLength) ? postLength : 0%> </div>
               <div>Post</div>
-            </a>
             </div>
           <div id="followers-sec" class="posts-ref">
             <div><%= (userProfile && userProfile.followers?.length) ? userProfile.followers.length : 0%> </div>
@@ -709,7 +707,7 @@
     <script>
         let followers = document.getElementById("followers-sec");
         let followings = document.getElementById("followings-sec");
-        // let posts = document.getElementById("post-sec");
+        let posts = document.getElementById("post-sec");
   
         followers.addEventListener("click",(e)=>{
           window.location.href = `/user/profile/<%=userProfile.id%>/followers`;
@@ -717,6 +715,9 @@
         followings.addEventListener("click",(e)=>{
           window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
         });
+        posts.addEventListener("click",(e)=>{
+          window.location.href = `/user/profile/<%=userProfile.id%>`;
+        })
      
       </script>
   </body>

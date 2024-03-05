@@ -95,7 +95,7 @@
         text-align: center;
         font-size: 1.1rem;
         font-weight: 500;
-        padding: 5px 1.5rem;
+        padding: 3px 1rem;
         text-wrap: nowrap;
       }
       .option-result {
@@ -167,8 +167,10 @@
           color: white;
           font-size: 1.2rem;
           background-color: #ff385c;
+          text-align: center !important;
         }
         .del-btn{
+          color: white !important;
           background-color: rgba(255, 0, 0, 0.89);
         }
         .red-btn{
@@ -378,6 +380,31 @@
         color: black;
         text-decoration: underline;
       }
+
+      
+.green-btn-adv-1 {
+    display: block;
+    margin: 2vw auto;
+    border: none;
+    border-radius: 3rem;
+    padding: 0.3rem 3rem;
+    color: white;
+    font-size: 1.3rem;
+    background-color: #ff385c;
+    width: fit-content;
+  }
+  @media(width<=800px){
+    .green-btn-adv-1{
+        padding: .2rem 3rem;
+      }
+  }
+  @media(width<=550px){
+    .green-btn-adv-1{
+        padding: .2rem 2rem;
+        font-size: 1.1rem;
+      }
+  }
+  
     </style>
   </head> 
   <body>
@@ -429,16 +456,16 @@
         </div>
         
         <% if (currUser && currUser.id == userProfile.id) { %>
-          <a href="/user/profile/<%= userProfile._id %>/edit" class="green-btn-adv">Edit Profile</a>         
+          <a href="/user/profile/<%= userProfile._id %>/edit" class="green-btn-adv-1">Edit Profile</a>         
         <% } else{%>
             <% if (currUser) { %>
               <% if (currUser.followings && currUser.followings.length && currUser.followings.includes(userProfile.id)) { %>
-                <button class="green-btn-adv following follow">Following</button>
+                <button class="green-btn-adv-1 following follow">Following</button>
                 <% } else{%>
-                  <button class="green-btn-adv follow">Follow</button>
+                  <button class="green-btn-adv-1 follow">Follow</button>
                   <% } %>
             <% } else{%>
-              <button class="green-btn-adv follow">Follow</button>
+              <button class="green-btn-adv-1 follow">Follow</button>
             <% } %>
         <% } %>
 
@@ -600,12 +627,12 @@
     <!-- follow feature -->
     <script>
       let followBtns = document.getElementsByClassName("follow");
-      console.log(followBtns.length)
-      console.log(followBtns)
+      // console.log(followBtns.length)
+      // console.log(followBtns)
       for(let i=0;i<followBtns.length;i++){
-        console.log(followBtns[i])
+        // console.log(followBtns[i])
         followBtns[i].addEventListener("click",(e)=>{
-          console.log("btn clicked")
+          // console.log("btn clicked")
         if(`<%=currUser%>`){
           if(followBtns[i].classList.contains("following")){
 

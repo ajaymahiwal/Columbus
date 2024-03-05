@@ -557,9 +557,9 @@
     <main>
       <section class="sec" id="sec-1">
         <div class="user-info">
-          <img src="<%= userProfile.image %>" alt="Error due to some issue profile photo is not visible,Please Reload" class="user-img" referrerpolicy="no-referrer">
+          <img src="<%= userProfile.image %>" alt="Error due to some issue profile photo is not visible,Please Reload" class="user-img profileWalaUser" referrerpolicy="no-referrer">
           <!-- <div class="user-img"></div> -->
-          <h2 class="user-name txt-cap"><%= userProfile.name %></h2>
+          <h2 class="user-name txt-cap profileWalaUser"><%= userProfile.name %></h2>
         </div>
         <div class="user-bio">
           <% if (userProfile.bio && userProfile.bio.length) { %>
@@ -570,11 +570,9 @@
         </div>
 
         <div class="user-stat">
-          <div id="post-sec">
-              <a href="#posts" class="posts-ref">
+          <div id="post-sec" class="posts-ref">
               <div><%= (postLength) ? postLength : 0%> </div>
               <div>Post</div>
-            </a>
             </div>
           <div id="followers-sec" class="posts-ref">
             <div><%= (userProfile && userProfile.followers?.length) ? userProfile.followers.length : 0%> </div>
@@ -709,7 +707,7 @@
     <script>
         let followers = document.getElementById("followers-sec");
         let followings = document.getElementById("followings-sec");
-        // let posts = document.getElementById("post-sec");
+        let posts = document.getElementById("post-sec");
   
         followers.addEventListener("click",(e)=>{
           window.location.href = `/user/profile/<%=userProfile.id%>/followers`;
@@ -717,6 +715,16 @@
         followings.addEventListener("click",(e)=>{
           window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
         });
+        posts.addEventListener("click",(e)=>{
+          window.location.href = `/user/profile/<%=userProfile.id%>`;
+        })
+
+        let user = document.getElementsByClassName("profileWalaUser");
+        for(let i=0;i<user.length;i++){
+          user[i].addEventListener("click",(e)=>{
+            window.location.href = `/user/profile/<%=userProfile.id%>`;
+          })
+        }
      
       </script>
 

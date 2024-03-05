@@ -120,6 +120,11 @@
       </a>
       <% } %>
     </div>
+
+    <% if (list.length == 0) { %>
+     <h1 class="text-center" style="color:#ff385c; min-height: 70dvh;">Now No Lists Are Present, You Can Create :)</h1>
+    <% } %>
+    
     <%- include('../includes/footer') %>
 
     

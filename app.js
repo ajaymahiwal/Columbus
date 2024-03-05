@@ -129,8 +129,9 @@ app.get("/auth/google",
 app.get("/auth/google/callback",
     passport.authenticate('google', {
         failureRedirect: "/signup", failureFlash: true,
-        successRedirect: "/user/profile"
-    })
+    }),(req,res)=>{
+                    res.redirect(`/user/profile/${req.user._id}`);
+            }
 );
 
 
