@@ -11,7 +11,7 @@ module.exports.renderSignUp = (req, res) => {
 module.exports.signUp = async (req, res) => {
     try {
         let { email, username, password } = req.body;
-        let name = username.replace("@gmail.com","");
+        let name = username.replace("@gmail.com", "");
         const newUser = new User({ email, username, name });
         let registeredUser = await User.register(newUser, password);
 
@@ -54,7 +54,7 @@ module.exports.logout = (req, res) => {
     });
 }
 
-module.exports.userProfile = async (req, res,next) => {
+module.exports.userProfile = async (req, res, next) => {
     let userProfile = await User.findById(req.params.id);
     // console.log(userProfile)
     if (userProfile) {
@@ -66,7 +66,7 @@ module.exports.userProfile = async (req, res,next) => {
     }
 
 }
-module.exports.editUserProfile = async (req, res,next) => {
+module.exports.editUserProfile = async (req, res, next) => {
     let userProfile = await User.findById(req.params.id);
     // console.log(userProfile)
     if (userProfile) {
@@ -78,7 +78,7 @@ module.exports.editUserProfile = async (req, res,next) => {
 }
 
 
-module.exports.saveEditsOfUserProfile = async (req, res,next) => {
+module.exports.saveEditsOfUserProfile = async (req, res, next) => {
     let { user } = req.body;
     delete user.username; //it someone added i will not allow to change anybody
     user.name = user.name.toLowerCase(); //user have full choice to  decide name
@@ -95,9 +95,72 @@ module.exports.saveEditsOfUserProfile = async (req, res,next) => {
     //     }
 
     //     user.contact_num = phone_no;
-        let updatedUser = await User.findByIdAndUpdate(`${req.user._id}`, { ...user }, { new: true, runValidators: true });
-        console.log(updatedUser);
-        // let updatedUser = await User.findById(`${req.user._id}`);
-        res.redirect(`/user/profile/${req.user._id}`);
-    
+    let updatedUser = await User.findByIdAndUpdate(`${req.user._id}`, { ...user }, { new: true, runValidators: true });
+    console.log(updatedUser);
+    // let updatedUser = await User.findById(`${req.user._id}`);
+    res.redirect(`/user/profile/${req.user._id}`);
+
+}
+
+
+module.exports.userIsNotLogin = (req, res, next) => {
+    req.flash("error", "Before Doing That Please Login :)")
+    res.redirect("/login");
+}
+
+
+module.exports.addNewUser = async (req, res, next) => {
+    let { fanID, starID } = req.body;
+    console.log(req.body);
+    let star = await User.findById(starID);
+    let fan = await User.findById(fanID);
+
+    //jab ye dono conditions true nhi hai tab ye ker do
+    if (!(star.followers.includes(fanID) && fan.followings.includes(starID))) {
+        fan.followings.push(star);
+        star.followers.push(fan);
+        await fan.save();
+        await star.save();
+
+        console.log("Follow Done")
+
+        // res.redirect(`/user/profile/${starID}`);
+        res.status(200).json({ message: "Done" });
+    }
+    else{
+        res.status(403).json({ message: "You Are Already Following that person" });
+    }
+
+
+}
+module.exports.removeUser = async (req, res, next) => {
+    let { fanID, starID } = req.body;
+    console.log(req.body);
+    let star = await User.findByIdAndUpdate(starID, { $pull: { followers: fanID } });
+    let fan = await User.findByIdAndUpdate(fanID, { $pull: { followings: starID } });
+
+    console.log("Unfollow Done")
+
+    // res.redirect(`/user/profile/${starID}`);
+    res.status(200).json({ message: "Done" });
+}
+
+
+module.exports.showFollowers = async(req,res,next)=>{
+    let userID = req.params.id;
+
+    let userProfile = await User.findById(userID).populate('followers');
+    let listings = await Listing.find({ owner: userID });
+    let postLength = listings.length;
+    console.log(userProfile)
+    res.render("./user/userFollowers.ejs",{userProfile,postLength});
+}
+
+module.exports.showFollowings = async(req,res,next)=>{
+    let userID = req.params.id;
+
+    let userProfile = await User.findById(userID).populate('followings');
+    let listings = await Listing.find({ owner: userID });
+    let postLength = listings.length;
+    res.render("./user/userFollowings.ejs",{userProfile,postLength});
 }

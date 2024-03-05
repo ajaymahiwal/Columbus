@@ -134,7 +134,7 @@
             justify-content: space-between;
         }
         .ques i{
-            font-size: 1rem;
+            font-size: 1.8rem;
         }
         .ans{
             height: 0;
@@ -443,7 +443,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <!-- <a class="nav-item nav-link " href="/">Home <span class="sr-only">(current)</span></a> -->
               <a class="nav-item nav-link" href="/listings">Show Places</a>
@@ -451,8 +451,21 @@
                 <a class="nav-item nav-link" href="/listings/new">Create New Place</a>
               <% } %>
             </div>
+            <div class="user-in-out navbar-nav">
+                <% if (!currUser) { %>
+                    <a class="nav-item nav-link" href="/signup" id="sign-up">Sign Up</a>
+                    <!-- <a class="nav-item nav-link" href="/login">Log In</a> -->
+                <% } else { %>
+                  <!-- <a class="nav-item nav-link" href="/logout">Log Out</a> -->
+                  <a class="nav-item nav-link" href="/user/profile/<%= currUser._id %>">
+                    <!-- <i class="fa-solid fa-user fa-xl" style="color: #ff385c;"></i> -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255, 56, 92,1)"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13Z"></path></svg>
+                  </a>
+                <% } %>
+            </div>
+        </div>
       </nav>
-
+ 
     
     <main>
         <section class="sec" id="sec-1">
@@ -504,75 +517,75 @@
                             <h3>Guest identity verification</h3>
                             <p>Our comprehensive verification system checks details such as name, address, government ID and more to confirm the identity of guests who book on Columbus.</p>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Reservation screening</h3>
                             <p>Our proprietary technology analyses hundreds of factors in each reservation and blocks certain bookings that show a high risk for disruptive parties and property damage.</p>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>$3m damage protection</h3>
                             <p>Columbus reimburses you for damage caused by guests to your home and belongings and includes these specialised protections:</p>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Art & valuables</h3>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Auto & boat</h3>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Pet damage</h3>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Income loss</h3>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>Deep cleaning</h3>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>$1m USD liability insurance</h3>
                             <p>You’re protected in the rare event that a guest gets hurt or their belongings are damaged or stolen.</p>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
                     </div>
                     <div>
                         <div>
                             <h3>24-hour safety line</h3>
                             <p>If you ever feel unsafe, our app provides one-tap access to specially trained safety agents, day or night.</p>
                         </div>
-                        <div> <i class="fa-solid fa-check" style="color: #00ff00;"></i> </div>
-                        <div><i class="fa-solid fa-xmark" style="color: #ff0000;"></i></div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width=40" height="40" fill="rgba(0,255,0,1)"><path d="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"></path></svg> </div>
+                        <div> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="rgba(255,0,0,1)"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg> </div>
                     </div>
                 </div>
             </div>
@@ -586,7 +599,7 @@
                 <div class="qna">
                     <div class="ques">
                         <h4>Is my place right for Columbus?</h4>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="ri-arrow-down-s-line"></i>
                     </div>
                     <p class="ans">Columbus guests are interested in all kinds of places. We have listings for tiny homes, cabins, tree houses and more. Even a spare room can be a great place to stay.
                     </p>
@@ -594,7 +607,7 @@
                 <div class="qna">
                     <div class="ques">
                         <h4>Do I have to host all the time?</h4>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="ri-arrow-down-s-line"></i>
                     </div>
                     <p class="ans">Not at all – you control your calendar. You can host once a year, a few nights a month or more often.
                     </p>
@@ -602,7 +615,7 @@
                 <div class="qna">
                     <div class="ques">
                         <h4>How much should I interact with guests?</h4>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="ri-arrow-down-s-line"></i>
                     </div>
                     <p class="ans">It’s up to you. Some Hosts prefer to message guests only at key moments – like sending a short note when they check in – while others also enjoy meeting their guests in person. You’ll find a style that works for you and your guests.
                     </p>
@@ -610,7 +623,7 @@
                 <div class="qna">
                     <div class="ques">
                         <h4>Any tips on being a great Columbus Host?</h4>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="ri-arrow-down-s-line"></i>
                     </div>
                     <p class="ans">Getting the basics down goes a long way. Keep your place clean, respond to guests promptly and provide necessary amenities like fresh towels. Some Hosts like adding a personal touch such as putting out fresh flowers or sharing a list of local places to explore – but it’s not required.
                     </p>
@@ -618,7 +631,7 @@
                 <div class="qna">
                     <div class="ques">
                         <h4>What are Columbus's fees?</h4>
-                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="ri-arrow-down-s-line"></i>
                     </div>
                     <p class="ans">Columbus typically collects a flat service fee of 3% of the reservation subtotal when you get paid. We also collect a fee from guests when they book. In many areas Airbnb also collects and pays sales and tourism taxes automatically on your behalf.
                     </p>
@@ -651,11 +664,11 @@
         for(let i=0;i<ques.length;i++){
             ques[i].addEventListener("click",(e)=>{
                 ques[i].nextElementSibling.classList.toggle("get-ans");
-                if(ques[i].children[1].classList.contains("fa-angle-up")){
-                    ques[i].children[1].setAttribute("class","fa-solid fa-angle-down");
+                if(ques[i].children[1].classList.contains("ri-arrow-up-s-line")){
+                    ques[i].children[1].setAttribute("class","ri-arrow-down-s-line");
                 }
                 else{
-                    ques[i].children[1].setAttribute("class","fa-solid fa-angle-up");
+                    ques[i].children[1].setAttribute("class","ri-arrow-up-s-line");
                 }
             })
         }

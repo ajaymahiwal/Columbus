@@ -251,6 +251,20 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+/* input[type=number] {
   -moz-appearance: textfield;
+} */
+
+
+/* form related */
+
+label{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+@media(width<=350px){
+    form{
+        padding: 5px 10px !important;
+    }
 }

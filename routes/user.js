@@ -34,4 +34,15 @@ router.get("/user/profile/:id/edit",isVaildID,isProfileOwner,userController.edit
 router.put("/user/profile/:id/edit",isVaildID,isProfileOwner,userController.saveEditsOfUserProfile);
 
 
+router.get("/user-is-not-login",userController.userIsNotLogin);
+
+router
+    .route("/user/follow-unfollow")
+    .post(userController.addNewUser)
+    .delete(userController.removeUser)
+
+
+router.get("/user/profile/:id/followers",userController.showFollowers);
+router.get("/user/profile/:id/followings",userController.showFollowings);
+
 module.exports = router;

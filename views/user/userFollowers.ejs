@@ -372,11 +372,169 @@
       .posts-ref{
         color: black;
         text-decoration: none;
-        cursor: pointer;
       }
       .posts-ref:hover{
         color: black;
         text-decoration: underline;
+      }
+      .section-main-title{
+        margin: 1rem 0;
+        text-align: center;
+        color: black;
+        text-transform: capitalize;
+      }
+     
+      .user-f{
+        /* border: 2px solid blue; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: .5rem;
+      }
+      .one-of-user + button{
+        /* border: 2px solid red; */
+        margin: 0;
+      }
+      .user-f > *{
+        border: 2px solid #ff385c;
+        width: 60%;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 1rem;
+        padding: .5rem 1rem;
+      }
+
+
+      .one-of-user{
+        display: flex;
+        /* width: 40%; */
+        column-gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        /* border: 2px solid red; */
+      }
+      
+      .one-of-user h2{
+        color: black;
+        /* color: #ff385c; */
+      }
+      .user-follow-btn{
+        background-color: black;
+        color: white;
+        padding: .2rem 1rem;
+      }
+      .user-dp{
+        /* border: 2px solid #ff385c; */
+        border: 2px solid black;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+
+
+      
+      @media (width<=950px) {
+        .user-f > *{
+            width: 80%;
+        }
+        .one-of-user h2{
+        color: black;
+      }
+      }
+      @media (width<=700px) {
+        .user-f > *{
+            width: 85%;
+        }
+        .one-of-user h2{
+        font-size: 1.4rem;
+      }
+      .user-dp{
+        width: 4rem;
+        height: 4rem;
+      }
+      }
+
+      @media (width<=500px) {
+        .user-f > *{
+            width: 90%;
+        }
+        .one-of-user h2{
+        font-size: 1.3rem;
+      }
+      .user-dp{
+        width: 3rem;
+        height: 3rem;
+      }
+      .section-main-title{
+        font-size: 1.8rem;
+      }
+      .user-follow-btn{
+        background-color: black;
+        color: white;
+        padding: .2rem 10px;
+      }
+      }
+
+      @media(width<=450px){
+        
+        .user-f > *{
+            width: 100%;
+        }
+        .one-of-user h2{
+        font-size: 1.3rem;
+      }
+      /* .user-dp{
+        width: 1rem;
+        height: 1rem;
+      } */
+      .section-main-title{
+        font-size: 1.8rem;
+      }
+      .user-follow-btn{
+        background-color: black;
+        color: white;
+        padding: .2rem 6px;
+      }
+      }
+      @media(width<=400px){
+        .one-of-user h2{
+        font-size: 1.2rem;
+      }
+      /* .user-dp{
+        width: 1rem;
+        height: 1rem;
+      } */
+      .section-main-title{
+        font-size: 1.8rem;
+      }
+      .user-follow-btn{
+        background-color: black;
+        color: white;
+        padding: .2rem 6px;
+        font-size: 1rem;
+      }
+      }
+      @media(width<=320px){
+        .one-of-user h2{
+        font-size: 1.1rem;
+      }
+      .user-dp{
+        width: 2.3rem;
+        height: 2.3rem;
+      }
+      .section-main-title{
+        font-size: 1.8rem;
+      }
+      .user-follow-btn{
+        background-color: black;
+        color: white;
+        padding: .2rem 6px;
+        font-size: .9rem;
+      }
       }
     </style>
   </head> 
@@ -414,7 +572,7 @@
         <div class="user-stat">
           <div id="post-sec">
               <a href="#posts" class="posts-ref">
-              <div><%= (listings && listings.length) ? listings.length : 0%> </div>
+              <div><%= (postLength) ? postLength : 0%> </div>
               <div>Post</div>
             </a>
             </div>
@@ -433,7 +591,7 @@
         <% } else{%>
             <% if (currUser) { %>
               <% if (currUser.followings && currUser.followings.length && currUser.followings.includes(userProfile.id)) { %>
-                <button class="green-btn-adv following follow">Following</button>
+                <button class="green-btn-adv  following follow">Following</button>
                 <% } else{%>
                   <button class="green-btn-adv follow">Follow</button>
                   <% } %>
@@ -444,158 +602,39 @@
 
       </section>
 
-
-      <section class="sec" id="sec-2">
-        <nav>
-          <ul id="nav-links">
-            <li class="active" id="0">Created Places</li>
-            <li id="1">Given Reviews</li>
-            <!-- <li id="2">Uncomplete Tasks</li>
-            <li id="3">Upcoming Tasks</li>
-            <li id="4">Lists</li> -->
-          </ul>
-        </nav>
-        <div class="option-result" id="option-result-par">
-          <div class="all-task" id="posts">
-            <% if (listings && listings.length) { %> 
-            <%for(let i=listings.length-1;i>=0;i--){%>
-            <div>
-              <h3><%= listings[i].title %></h3>
-              <a
-                href="/listings/<%= listings[i]._id %>"
-                target="_blank"
-                class="show-in-detail"
-                >Show In Detail</a
-              >
-            </div>
-            <% } %> 
-            <% } else{%>
-              <!-- use image like github, no issue section mein vala image vo cartoon and fox -->
-              <div>
-                <h3>
-                  No Result Found !
-                </h3>
-              </div>
-            <% } %>
-          </div>
-          <div class="all-task hide">
-            <% if (reviews && reviews.length) { %> 
-              <%for(let i=reviews.length-1;i>=0;i--){%>
-              <div>
-                <p>
-                    <% for( let star = 0; star < reviews[i].rating; star++ ) { %>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="rgba(240,187,64,1)"><path d="M12.0006 18.26L4.94715 22.2082L6.52248 14.2799L0.587891 8.7918L8.61493 7.84006L12.0006 0.5L15.3862 7.84006L23.4132 8.7918L17.4787 14.2799L19.054 22.2082L12.0006 18.26Z"></path></svg>
-                    <% } %>
-                </p>
-                <p class="txt-cap"><%= reviews[i].comment %></p>
-                <a
-                  href="/listings/<%= reviews[i].postId %>"
-                  target="_blank"
-                  class="show-in-detail"
-                  >Show Review</a
-                >
-              </div>
-              <% } %>  
-              <% } else{%>
-                <!-- use image like github, no issue section mein vala image vo cartoon and fox -->
+      <section class="sec-2">
+        <h1 class="section-main-title"><%= userProfile.name %>'s Followers</h1>
+        <div class="user-f">
+            <% for( let i = userProfile.followers.length-1; i >= 0; i-- ) { %>
                 <div>
-                  <h3>
-                    No Result Found !
-                  </h3>
+                    
+                    <a href="/user/profile/<%= userProfile.followers[i].id%>" class="one-of-user">
+                        <img src="<%= userProfile.followers[i].image%>" alt="user-img" class="user-dp">
+                        <h2><%= userProfile.followers[i].name%></h2>
+                    </a>
+                    <% if (currUser) { %>
+                        <% if (currUser.id != userProfile.followers[i].id) { %>
+                            <% if (userProfile.followings.includes(userProfile.followers[i].id)) { %>
+                                <button class="green-btn-adv user-follow-btn following follow">Following</button>
+                                <% } else{%>
+                                  <button class="green-btn-adv user-follow-btn follow">Follow</button>
+                                  <% } %>
+                        <% } %>
+                      <% } else{%>
+                        <button class="green-btn-adv user-follow-btn follow">Follow</button>
+                      <% } %>
                 </div>
-              <% } %>
-          </div>
-        </div>
-      </section>
 
-      <% if (currUser && currUser.id == userProfile.id) { %>
-        <section id="sec-3">
-          <div class="green-btn-adv logout del-btn">LogOut Me :)</div>
-          <div id="confirmBox" class="confirm-box hide">
-            <h1>Do You Want To LogOut ?</h1>
-            <div>
-                <form action="/logout?_method=DELETE" method="post">
-                    <button class="green-btn del-btn">Yes,I want</button>
-                </form>
-                <button class="green-btn" id="no-btn">No</button>
-            </div>
-          </div>
-        </section>
-      <% } %>
+            <% } %>
+        </div>
+
+        <% if (userProfile.followers?.length == 0) { %>
+            <h5 class="text-center">No Followers Of <%= userProfile.name.toUpperCase()%></h5>
+           <% } %>
+      </section>
 
     </main>
 
-    
-
-
-    <script>
-        let navLinks = document.getElementById("nav-links");
-        let optionResult = document.getElementById("option-result-par");
-      // console.dir(navLinks);
-
-        navLinks.addEventListener('click',(e)=>{
-            // console.log(e.target.nodeName)
-
-            if((!e.target.classList.contains("active")) && (e.target.nodeName == 'LI')){
-              let idx = e.target.getAttribute("id");
-              // console.log(idx);
-              for(let i=0;i<navLinks.children.length;i++){
-                if(i == idx){
-                  navLinks.children[i].classList.add("active");
-                }else{
-                  navLinks.children[i].classList.remove("active");
-                }
-              }
-
-              for(let i=0;i<optionResult.children.length;i++){
-                if(i == idx){
-                  optionResult.children[i].classList.remove("hide");
-                }else{
-                  if(!optionResult.children[i].classList.contains("hide")){
-                    optionResult.children[i].classList.add("hide");
-                  }
-                }
-              }
-            }
-        })
-    </script>
-
-    <script>
-       let delBtn = document.querySelector('.del-btn');
-        let confirmBox = document.querySelector('#confirmBox');
-
-
-       if(delBtn){
-        delBtn.addEventListener('click',(e)=>{
-            confirmBox.classList.toggle("hide");
-
-
-            if(!confirmBox.classList.contains('hide')){
-            window.addEventListener('click',(e)=>{
-                // console.log(e.target);
-                if((e.target != confirmBox) && (e.target != delBtn) ){
-                    confirmBox.classList.add('focus-eff');
-                    if(confirmBox.classList.contains('focus-eff')){
-                        setTimeout(()=>{
-                            // console.log('effect class is deleted !');
-                            confirmBox.classList.remove('focus-eff');
-                        },500);
-                    }
-                }
-            })
-        }
-        })
-       }
-
-        let noBtn = document.querySelector("#no-btn");
-        if(noBtn){
-          noBtn.addEventListener('click',(e)=>{
-            confirmBox.classList.add("hide");
-        })
-        }
-        
-    
-    </script>
 
     <!-- follow feature -->
     <script>
@@ -621,7 +660,7 @@
             },
             body: JSON.stringify({
               fanID:`<%=currUser?.id%>`,
-              starID:`<%=userProfile?.id%>`
+              starID:`<%=userProfile.id%>`
             }),
           }).then(response=>{
             if(response.ok){
@@ -645,7 +684,7 @@
             },
             body: JSON.stringify({
               fanID:`<%=currUser?.id%>`,
-              starID:`<%=userProfile?.id%>`
+              starID:`<%=userProfile.id%>`
             }),
           }).then(response=>{
             if(response.ok){
@@ -665,21 +704,20 @@
       }
     </script>
 
-
+    
     <!-- redirection to see followers and other -->
     <script>
-      let followers = document.getElementById("followers-sec");
-      let followings = document.getElementById("followings-sec");
-      // let posts = document.getElementById("post-sec");
-
-      followers.addEventListener("click",(e)=>{
-        window.location.href = `/user/profile/<%=userProfile.id%>/followers`;
-      });
-      followings.addEventListener("click",(e)=>{
-        window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
-      });
-   
-    </script>
-
+        let followers = document.getElementById("followers-sec");
+        let followings = document.getElementById("followings-sec");
+        // let posts = document.getElementById("post-sec");
+  
+        followers.addEventListener("click",(e)=>{
+          window.location.href = `/user/profile/<%=userProfile.id%>/followers`;
+        });
+        followings.addEventListener("click",(e)=>{
+          window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
+        });
+     
+      </script>
   </body>
 </html>
