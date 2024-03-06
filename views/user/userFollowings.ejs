@@ -398,7 +398,7 @@
       }
       .user-f > *{
         border: 2px solid #ff385c;
-        width: 60%;
+        width: 35%;
         text-transform: capitalize;
         display: flex;
         align-items: center;
@@ -410,6 +410,7 @@
 
       .one-of-user{
         display: flex;
+        /* flex-wrap: wrap; */
         /* width: 40%; */
         column-gap: 1rem;
         justify-content: center;
@@ -419,6 +420,7 @@
       
       .one-of-user h2{
         color: black;
+        word-wrap: break-word;
         /* color: #ff385c; */
       }
       .user-follow-btn{
@@ -439,7 +441,7 @@
       
       @media (width<=950px) {
         .user-f > *{
-            width: 80%;
+            width: 45%;
         }
         .one-of-user h2{
         color: black;
@@ -447,7 +449,7 @@
       }
       @media (width<=700px) {
         .user-f > *{
-            width: 85%;
+            width: 50%;
         }
         .one-of-user h2{
         font-size: 1.4rem;
@@ -460,7 +462,7 @@
 
       @media (width<=500px) {
         .user-f > *{
-            width: 90%;
+            width: 55%;
         }
         .one-of-user h2{
         font-size: 1.3rem;
@@ -482,7 +484,7 @@
       @media(width<=450px){
         
         .user-f > *{
-            width: 100%;
+            width: 60%;
         }
         .one-of-user h2{
         font-size: 1.3rem;
@@ -501,6 +503,9 @@
       }
       }
       @media(width<=400px){
+        .user-f > *{
+            width: 65%;
+        }
         .one-of-user h2{
         font-size: 1.2rem;
       }
@@ -589,12 +594,12 @@
         <% } else{%>
             <% if (currUser) { %>
               <% if (currUser.followings && currUser.followings.length && currUser.followings.includes(userProfile.id)) { %>
-                <button class="green-btn-adv  following follow">Following</button>
+                <button class="green-btn-adv  following follow-star">Following</button>
                 <% } else{%>
-                  <button class="green-btn-adv follow">Follow</button>
+                  <button class="green-btn-adv follow-star">Follow</button>
                   <% } %>
             <% } else{%>
-              <button class="green-btn-adv follow">Follow</button>
+              <button class="green-btn-adv follow-star">Follow</button>
             <% } %>
         <% } %>
 
@@ -603,16 +608,17 @@
       <section class="sec-2">
         <h1 class="section-main-title"><%= userProfile.name %>'s Followings</h1>
         <div class="user-f">
-            <% for( let i = userProfile.followings.length-1; i >= 0; i-- ) { %>
+          <% for( let i = userProfile.followings.length-1; i >= 0; i-- ) { %>
+            <!-- <p class="following-user"><%= userProfile.followings[i].id %></p> -->
                 <div>
                     
                     <a href="/user/profile/<%= userProfile.followings[i].id%>" class="one-of-user">
                         <img src="<%= userProfile.followings[i].image%>" alt="user-img" class="user-dp">
                         <h2><%= userProfile.followings[i].name%></h2>
-                    </a>
-                    <% if (currUser) { %>
+                      </a>
+                      <!-- <% if (currUser) { %>
                         <% if (currUser.id != userProfile.followings[i].id) { %>
-                            <% if (userProfile.followings.includes(userProfile.followings[i].id)) { %>
+                            <% if (currUser.followings.includes(userProfile.followings[i].id)) { %>
                                 <button class="green-btn-adv user-follow-btn following follow">Following</button>
                                 <% } else{%>
                                   <button class="green-btn-adv user-follow-btn follow">Follow</button>
@@ -620,7 +626,7 @@
                         <% } %>
                       <% } else{%>
                         <button class="green-btn-adv user-follow-btn follow">Follow</button>
-                      <% } %>
+                      <% } %> -->
                 </div>
 
             <% } %>
@@ -634,22 +640,95 @@
     </main>
 
 
-    <!-- follow feature -->
-    <script>
+    <!-- follow feature for following user-->
+    <!-- <script>
       let followBtns = document.getElementsByClassName("follow");
-      console.log(followBtns.length)
-      console.log(followBtns)
-      for(let i=0;i<followBtns.length;i++){
+    
+      let followingUsers = document.getElementsByClassName("following-user");
+      // console.log(followBtns.length)
+      // console.log(followBtns)
+      for(let i=followBtns.length-1;i>=0;i--){
         console.log(followBtns[i])
         followBtns[i].addEventListener("click",(e)=>{
           console.log("btn clicked")
         if(`<%=currUser%>`){
           if(followBtns[i].classList.contains("following")){
 
+            // console.log("userid",followingUsers[i]);
           followBtns[i].classList.remove("following");
           // followBtns[i].innerText = "Follow";
 
           followBtns[i].disabled = true;
+
+          fetch("/user/follow-unfollow",{
+            method:"DELETE",
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+              fanID:`<%=currUser?.id%>`,
+              // starID:`<%=userProfile.id%>`
+              starID:`${followingUsers[i].innerText}`
+            }),
+          }).then(response=>{
+            if(response.ok){
+              console.log("unfollow request successful.")
+              window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
+            }else{
+              console.log("unfollow request failed.")
+            }
+          })
+
+          
+        }else{
+          followBtns[i].classList.add("following");
+          // followBtns[i].innerText = "Following";
+          followBtns[i].disabled = true;
+          // console.log(followingUsers[i].id);
+
+          fetch("/user/follow-unfollow",{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body: JSON.stringify({
+              fanID:`<%=currUser?.id%>`,
+              // starID:`<%=userProfile.id%>`
+              starID:`${followingUsers[i].innerText}`
+            }),
+          }).then(response=>{
+            if(response.ok){
+              console.log("follow request successful.")
+              window.location.href = `/user/profile/<%=userProfile.id%>/followings`;
+            }else{
+              console.log("follow request failed.")
+            }
+          })
+
+
+        }
+        }else{
+          window.location.href = "/user-is-not-login";
+        }
+      })
+      }
+    </script> -->
+
+    <!-- for star user -->
+    <script>
+        let followBtnsForStar = document.getElementsByClassName("follow-star");
+        for(let i=followBtnsForStar.length-1;i>=0;i--){
+        console.log(followBtnsForStar[i])
+        followBtnsForStar[i].addEventListener("click",(e)=>{
+          console.log("btn clicked")
+        if(`<%=currUser%>`){
+          if(followBtnsForStar[i].classList.contains("following")){
+
+          followBtnsForStar[i].classList.remove("following");
+          // followBtnsForStar[i].innerText = "Follow";
+
+          followBtnsForStar[i].disabled = true;
+          console.log(followingUsers[i])
 
           fetch("/user/follow-unfollow",{
             method:"DELETE",
@@ -671,9 +750,9 @@
 
           
         }else{
-          followBtns[i].classList.add("following");
-          // followBtns[i].innerText = "Following";
-          followBtns[i].disabled = true;
+          followBtnsForStar[i].classList.add("following");
+          // followBtnsForStar[i].innerText = "Following";
+          followBtnsForStar[i].disabled = true;
 
           fetch("/user/follow-unfollow",{
             method:'POST',

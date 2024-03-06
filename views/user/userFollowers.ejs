@@ -610,7 +610,7 @@
                         <img src="<%= userProfile.followers[i].image%>" alt="user-img" class="user-dp">
                         <h2><%= userProfile.followers[i].name%></h2>
                     </a>
-                    <% if (currUser) { %>
+                    <!-- <% if (currUser) { %>
                         <% if (currUser.id != userProfile.followers[i].id) { %>
                             <% if (userProfile.followings.includes(userProfile.followers[i].id)) { %>
                                 <button class="green-btn-adv user-follow-btn following follow">Following</button>
@@ -620,7 +620,7 @@
                         <% } %>
                       <% } else{%>
                         <button class="green-btn-adv user-follow-btn follow">Follow</button>
-                      <% } %>
+                      <% } %> -->
                 </div>
 
             <% } %>

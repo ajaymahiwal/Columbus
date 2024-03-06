@@ -3,6 +3,7 @@ const Listing = require("../Models/listing.js");
 const User = require("../Models/user.js");
 const Review = require("../Models/review.js");
 const ExpressError = require("../utils/ExpressError.js")
+const mongoose = require("mongoose");
 
 module.exports.renderSignUp = (req, res) => {
     res.render("./user/signup.ejs");
@@ -122,7 +123,8 @@ module.exports.addNewUser = async (req, res, next) => {
 
     //jab ye dono conditions true nhi hai tab ye ker do
     if (!(star.followers.includes(fanID) && fan.followings.includes(starID))) {
-        fan.followings.push(star);
+        // fan.followings.push(new mongoose.Types.ObjectId(starID));
+        fan.followings.push(starID);
         star.followers.push(fan);
         await fan.save();
         await star.save();
